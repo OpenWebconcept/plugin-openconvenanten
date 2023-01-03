@@ -58,7 +58,7 @@ class OpenConvenanten
             'Inhoud'                      => $this->meta('Inhoud', ''),
             'Duur'                        => $this->meta('Duur', ''),
             'Datum_ondertekening'         => $this->meta('Datum_ondertekening', ''),
-            'slug'                        => \sanitize_title($this->meta('ID', '')),
+            'slug'                        => \sanitize_title($this->meta('Titel', '')),
             'identifier'                  => $this->field('ID', ''),
         ];
 
