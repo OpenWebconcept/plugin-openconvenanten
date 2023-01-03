@@ -14,6 +14,7 @@ class SubmissionHandler
         if (! $this->isOpenConvenantForm($form)) {
             return;
         }
+    
         $metaFields  = rgars($feed, 'meta/postMetaFields');
 
         $attachments = $this->getAttachments($metaFields, $entry);
@@ -21,6 +22,7 @@ class SubmissionHandler
 
         $this->updatePostMeta($ID, array_merge($attachments, $parties));
         $this->updatePostTitle($ID, $metaFields, $entry);
+        $this->setCaseNumber($ID);
     }
 
     private function getAttachments(array $metadata, array $entry): array
@@ -65,12 +67,42 @@ class SubmissionHandler
     {
         wp_update_post([
             'ID'         => $ID,
-            'post_title' => Title::make('convenant_ID', $metadata, $entry)->get(),
+            'post_title' => Title::make('convenant_Titel', $metadata, $entry)->get(),
+        ]);
+    }
+
+    private function setCaseNumber(int $ID)
+    {
+        $caseNumber = get_post_meta($ID, 'convenant_ID', true);
+
+        if ($caseNumber) {
+            return;
+        }
+
+        $caseNumber = $this->createUUID();
+
+        $this->updatePostMeta($ID, [
+            'convenant_ID' => $caseNumber,
         ]);
     }
 
     private function isOpenConvenantForm($form): bool
     {
-        return strpos($form['title'], 'OpenConvenant') !== false;
+        return strpos($form['title'] ?? '', 'OpenConvenant') !== false;
+    }
+
+    private function createUUID(): string
+    {
+        return sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff)
+        );
     }
 }

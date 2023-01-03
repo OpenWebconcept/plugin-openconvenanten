@@ -19,9 +19,9 @@ abstract class Field
 
     public static function make(string $key, array $metadata, array $entry)
     {
-        return new static($key,$metadata, $entry);
+        return new static($key, $metadata, $entry);
     }
-    
+
     /**
      * @return mixed
      */
@@ -39,13 +39,14 @@ abstract class Field
     protected function getMetaField(string $key): ?array
     {
         foreach ($this->metadata as $metaField) {
-            if ($metaField['custom_key'] === $key) {
+            if ($metaField['custom_key'] === $key || $metaField['key'] === $key) {
                 return $metaField;
             }
         }
         
         return null;
     }
+
     /**
      * @return mixed
      */
