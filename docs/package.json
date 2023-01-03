@@ -1,0 +1,13 @@
+{
+  "name": "openconvenanten-docs",
+  "version": "1.0.8",
+  "description": "OpenConvenanten docs",
+  "dependencies": {
+    "redoc-cli": "^0.13.2"
+  },
+  "scripts": {
+    "doc-build": "redoc-cli bundle ./specs/openapi.yaml --output ./index.html -t templates/template.hbs"
+  },
+  "author": "Yard | Digital Agency",
+  "license": "ISC"
+}

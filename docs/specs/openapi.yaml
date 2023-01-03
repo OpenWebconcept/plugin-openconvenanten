@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  title: 'OpenWebConcept OpenConvenanten API'
+  termsOfService: 'https://www.openwebconcept.nl/'
+  contact:
+    name: OpenWebConcept
+    url: 'https://www.openwebconcept.nl/'
+    email: info@openwebconcept.nl
+  license:
+    name: OpenWebConcept
+    url: 'https://www.openwebconcept.nl/'
+  version: 1.0.13
+  x-logo:
+    url: 'https://openwebconcept.nl/wp-content/themes/openwebconcept/assets/src/images/logo-dark.png'
+  description:
+    $ref: ../chapters/description.md
+  x-externalDocs:
+    description: 'Find out how to create Github repo for your OpenAPI spec.'
+    url: 'https://openwebconcept.bitbucket.io/openconvenanten/'
+servers:
+  -
+    url: 'https://{site}/wp-json/yard/openconvenanten/v1'
+    description: ''
+paths:
+  /items:
+    get:
+      tags:
+        - API
+      description: 'Get all openConvenanten items'
+      operationId: getItems
+      parameters:
+        -
+          name: 'filter[]'
+          in: query
+          description: 'Filter items by date of modification'
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+            pattern: 'updatedAfterDate:YYYY-MM-DD'
+          example: 'updatedAfterDate:2021-03-01'
+        -
+          name: 'filter[]'
+          in: query
+          description: 'Filter items by date of publication'
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+            pattern: 'publishedAfterDate:YYYY-MM-DD'
+          example: 'publishedAfterDate:2021-03-01'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+  '/items/{UUID}':
+    get:
+      tags:
+        - API
+      description: 'Get openConvenanten item by UUID'
+      operationId: getItem
+      parameters:
+        -
+          name: UUID
+          in: path
+          description: 'UUID of OpenConvenanten item'
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: /36aea3a9-e1d8-407a-8ea3-4617856f97fc
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenConvenanten'
+              examples:
+                '200':
+                  summary: ''
+                  value: { name: 1 }
+        '404':
+          description: 'OpenConvenanten not found'
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    OpenConvenanten:
+      title: 'OpenConvenanten model'
+      type: object
+    repository: {  }
+    Response:
+      properties:
+        Convenantenverzoeken:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenConvenanten'
+        pagination:
+          type: array
+          items: {  }
+        query_parameters: {  }
+      type: object
