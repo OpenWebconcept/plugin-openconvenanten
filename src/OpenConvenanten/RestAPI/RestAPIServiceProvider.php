@@ -71,7 +71,7 @@ class RestAPIServiceProvider extends ServiceProvider
             'permission_callback' => '__return_true'
         ]);
 
-        \register_rest_route($this->namespace, 'items/(?P<id>[a-z0-9]{8}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{4}\-[a-z0-9]{12})', [
+        \register_rest_route($this->namespace, 'items/(?P<id>\d+)', [
             'methods'  => \WP_REST_Server::READABLE,
             'callback' => [new ItemController($this->plugin), 'getItem'],
             'permission_callback' => '__return_true'

@@ -100,13 +100,7 @@ abstract class Base
     {
         $args = array_merge($this->queryArgs, [
             'post_type'  => [$this->posttype],
-            'meta_query' => [
-                [
-                    'key'     => 'convenant_UUID',
-                    'value'   => $id,
-                    'compare' => 'IN',
-                ],
-            ]
+            'p'          => $id,
         ]);
 
         $this->query = new WP_Query($args);
