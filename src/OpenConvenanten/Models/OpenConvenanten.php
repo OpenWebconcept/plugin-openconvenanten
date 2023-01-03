@@ -49,8 +49,9 @@ class OpenConvenanten
         $data = [
             'Convenantverzoek_informatie' => InfoEntity::make($this->meta('Convenantverzoek_informatie', []))->get(),
             'ID'                          => $this->meta('ID'),
+            'Titel'                       => $this->meta('Titel', $this->meta('ID')),
             'Beschrijving'                => $this->field('post_content', ''),
-            'Samenvatting'                => $this->field('post_excerpt', ''),
+            'Samenvatting'                => $this->meta('Samenvatting', ''),
             'Onderwerp'                   => $this->meta('Onderwerp', ''),
             'Beleidsterrein'              => $this->meta('Beleidsterrein', ''),
             'Partijen'                    => PartijenEntity::make($this->asNumeric($this->meta('Partijen', [])))->get(),

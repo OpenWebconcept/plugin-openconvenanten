@@ -15,13 +15,15 @@ return [
                 'convenant_ID'                  => [
                     'required'  => true,
                 ],
+                'convenant_Titel'               => [
+                    'required'  => true,
+                ],
                 'convenant_Samenvatting'        => [
                     'required'  => true,
                 ],
                 'convenant_Partijen'            => [
                     'required'  => true,
                 ],
-
                 'convenant_Onderwerp'           => [
                     'required'  => true,
                 ],
@@ -46,6 +48,11 @@ return [
             [
                 'name' => __('Zaaknummer', OCV_LANGUAGE_DOMAIN),
                 'id'   => 'convenant_ID',
+                'type' => 'text',
+            ],
+            [
+                'name' => __('Titel', OCV_LANGUAGE_DOMAIN),
+                'id'   => 'convenant_Titel',
                 'type' => 'text',
             ],
             [

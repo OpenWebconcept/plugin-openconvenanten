@@ -56,9 +56,55 @@
       "useRichTextEditor": false,
       "errors": [],
       "fields": "",
-      "formId": 14,
+      "formId": 19,
       "id": 6,
       "displayOnly": ""
+    },
+    {
+      "type": "text",
+      "id": 17,
+      "formId": 19,
+      "label": "Titel",
+      "adminLabel": "",
+      "isRequired": false,
+      "size": "large",
+      "errorMessage": "",
+      "visibility": "visible",
+      "inputs": null,
+      "description": "",
+      "allowsPrepopulate": false,
+      "inputMask": false,
+      "inputMaskValue": "",
+      "inputMaskIsCustom": false,
+      "maxLength": "",
+      "inputType": "",
+      "labelPlacement": "",
+      "descriptionPlacement": "",
+      "subLabelPlacement": "",
+      "placeholder": "",
+      "cssClass": "",
+      "inputName": "",
+      "noDuplicates": false,
+      "defaultValue": "",
+      "enableAutocomplete": false,
+      "autocompleteAttribute": "",
+      "choices": "",
+      "conditionalLogic": "",
+      "productField": "",
+      "layoutGridColumnSpan": 12,
+      "enablePasswordInput": "",
+      "enableEnhancedUI": 0,
+      "layoutGroupId": "1d231bec",
+      "multipleFiles": false,
+      "maxFiles": "",
+      "calculationFormula": "",
+      "calculationRounding": "",
+      "enableCalculation": "",
+      "disableQuantity": false,
+      "displayAllCategories": false,
+      "useRichTextEditor": false,
+      "errors": [],
+      "fields": ""
     },
     {
       "type": "textarea",
@@ -104,7 +150,7 @@
       "displayAllCategories": false,
       "errors": [],
       "fields": "",
-      "formId": 14,
+      "formId": 19,
       "displayOnly": ""
     },
     {
@@ -150,7 +196,7 @@
       "useRichTextEditor": false,
       "errors": [],
       "fields": "",
-      "formId": 14,
+      "formId": 19,
       "id": 7,
       "displayOnly": ""
     },
@@ -197,7 +243,7 @@
       "useRichTextEditor": false,
       "errors": [],
       "fields": "",
-      "formId": 14,
+      "formId": 19,
       "id": 8,
       "displayOnly": ""
     },
@@ -301,12 +347,14 @@
       "errors": [],
       "checkboxLabel": "",
       "fields": "",
-      "formId": 14,
+      "formId": 19,
       "id": 9,
       "displayOnly": ""
     },
     {
-      "type": "number",
+      "type": "text",
+      "id": 16,
+      "formId": 19,
       "label": "Duur",
       "adminLabel": "",
       "isRequired": false,
@@ -314,7 +362,6 @@
       "errorMessage": "",
       "visibility": "visible",
       "inputs": null,
-      "numberFormat": "decimal_dot",
       "description": "",
       "allowsPrepopulate": false,
       "inputMask": false,
@@ -334,24 +381,21 @@
       "autocompleteAttribute": "",
       "choices": "",
       "conditionalLogic": "",
-      "enableCalculation": false,
-      "rangeMin": "",
-      "rangeMax": "",
-      "calculationFormula": "",
       "productField": "",
-      "layoutGridColumnSpan": "",
+      "layoutGridColumnSpan": 12,
+      "enablePasswordInput": "",
       "enableEnhancedUI": 0,
-      "layoutGroupId": "a9598ce4",
+      "layoutGroupId": "b529e4a5",
       "multipleFiles": false,
       "maxFiles": "",
+      "calculationFormula": "",
       "calculationRounding": "",
+      "enableCalculation": "",
       "disableQuantity": false,
       "displayAllCategories": false,
       "useRichTextEditor": false,
       "errors": [],
       "fields": "",
-      "formId": 14,
-      "id": 10,
       "displayOnly": ""
     },
     {
@@ -401,7 +445,7 @@
       "useRichTextEditor": false,
       "errors": [],
       "fields": "",
-      "formId": 14,
+      "formId": 19,
       "id": 11,
       "displayOnly": ""
     },
@@ -448,14 +492,14 @@
       "displayAllCategories": false,
       "errors": [],
       "fields": "",
-      "formId": 14,
+      "formId": 19,
       "id": 12,
       "displayOnly": ""
     },
     {
       "type": "fileupload",
       "id": 15,
-      "formId": 14,
+      "formId": 19,
       "label": "Bijlagen (bestanden)",
       "adminLabel": "",
       "isRequired": false,
@@ -498,7 +542,8 @@
       "useRichTextEditor": false,
       "checkboxLabel": "",
       "errors": [],
-      "fields": ""
+      "fields": "",
+      "displayOnly": ""
     },
     {
       "type": "repeater",
@@ -586,12 +631,12 @@
           "errors": [],
           "fields": "",
           "layoutSpacerGridColumnSpan": 0,
-          "formId": 14,
+          "formId": 19,
           "pageNumber": 1,
           "id": 14
         }
       ],
-      "formId": 14,
+      "formId": 19,
       "nestingLevel": 0,
       "id": 13,
       "displayOnly": ""
@@ -607,8 +652,110 @@
   "lastPageButton": null,
   "pagination": null,
   "firstPageCssClass": null,
-  "id": 14,
-  "nextFieldId": 16,
+  "id": 19,
+  "nextFieldId": 18,
+  "feeds": {
+    "gravityformsadvancedpostcreation": [
+      {
+        "id": "2",
+        "is_active": "1",
+        "feed_order": "0",
+        "meta": {
+          "feedName": "OpenConvenanten",
+          "action": "post-create",
+          "postVisibility": "public",
+          "postType": "openconvenant-item",
+          "postStatus": "publish",
+          "postDate": "entry",
+          "postDateFieldDate": "",
+          "postDateFieldTime": "",
+          "postDateCustom": "",
+          "postAuthor": "logged-in-user",
+          "postComments": "0",
+          "postPingbacks": "0",
+          "postTitle": "OpenConvenanten: {Titel}",
+          "postContent": "{all_fields}",
+          "postExcerpt": "{Samenvatting}",
+          "postMetaFields": [
+            {
+              "key": "convenant_ID",
+              "custom_key": "",
+              "value": "6",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_Titel",
+              "custom_key": "",
+              "value": "17",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_Samenvatting",
+              "custom_key": "",
+              "value": "5",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_Partijen",
+              "custom_key": "",
+              "value": "7",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_Onderwerp",
+              "custom_key": "",
+              "value": "8",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_Beleidsterrein",
+              "custom_key": "",
+              "value": "9",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_Duur",
+              "custom_key": "",
+              "value": "16",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_Datum_ondertekening",
+              "custom_key": "",
+              "value": "11",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_Inhoud",
+              "custom_key": "",
+              "value": "12",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_BijlageURLS",
+              "custom_key": "",
+              "value": "13",
+              "custom_value": ""
+            },
+            {
+              "key": "convenant_Bijlagen",
+              "custom_key": "",
+              "value": "15",
+              "custom_value": ""
+            }
+          ],
+          "postTaxonomy_openconvenanten-type": "",
+          "feed_condition_conditional_logic_object": [],
+          "feed_condition_conditional_logic": "0",
+          "postDiscussion": "",
+          "postMedia": "",
+          "feedCondition": ""
+        },
+        "addon_slug": "gravityformsadvancedpostcreation",
+        "event_type": null
+      }
+    ]
+  },
   "confirmations": [
     {
       "id": "63aac68b24263",
@@ -632,90 +779,5 @@
       "subject": "Nieuwe inzending van {form_title}",
       "message": "{all_fields}"
     }
-  ],
-  "feeds": {
-    "gravityformsadvancedpostcreation": [
-      {
-        "id": "1",
-        "form_id": "14",
-        "is_active": "1",
-        "feed_order": "0",
-        "meta": {
-          "feedName": "OpenConvenanten",
-          "action": "post-create",
-          "postVisibility": "public",
-          "postType": "page",
-          "postStatus": "publish",
-          "postDate": "entry",
-          "postDateFieldDate": "",
-          "postDateFieldTime": "",
-          "postDateCustom": "",
-          "postAuthor": "logged-in-user",
-          "postComments": "0",
-          "postPingbacks": "0",
-          "postTitle": "OpenConvenanten: {Zaaknummer}",
-          "postContent": "{all_fields}",
-          "postMedia": ["15"],
-          "postMetaFields": [
-            {
-              "key": "gf_custom",
-              "custom_key": "convenant_ID",
-              "value": "6",
-              "custom_value": ""
-            },
-            {
-              "key": "gf_custom",
-              "custom_key": "convenant_Samenvatting",
-              "value": "5",
-              "custom_value": ""
-            },
-            {
-              "key": "gf_custom",
-              "custom_key": "convenant_Partijen",
-              "value": "7",
-              "custom_value": ""
-            },
-            {
-              "key": "gf_custom",
-              "custom_key": "convenant_Onderwerp",
-              "value": "8",
-              "custom_value": ""
-            },
-            {
-              "key": "gf_custom",
-              "custom_key": "convenant_Beleidsterrein",
-              "value": "9",
-              "custom_value": ""
-            },
-            {
-              "key": "gf_custom",
-              "custom_key": "convenant_Duur",
-              "value": "10",
-              "custom_value": ""
-            },
-            {
-              "key": "gf_custom",
-              "custom_key": "convenant_Inhoud",
-              "value": "12",
-              "custom_value": ""
-            },
-            {
-              "key": "gf_custom",
-              "custom_key": "convenant_BijlageURLS",
-              "value": "13",
-              "custom_value": ""
-            }
-          ],
-          "postTaxonomy_category": "",
-          "postTaxonomy_post_tag": "",
-          "feed_condition_conditional_logic_object": [],
-          "feed_condition_conditional_logic": "0",
-          "postDiscussion": "",
-          "feedCondition": ""
-        },
-        "addon_slug": "gravityformsadvancedpostcreation",
-        "event_type": null
-      }
-    ]
-  }
+  ]
 }
