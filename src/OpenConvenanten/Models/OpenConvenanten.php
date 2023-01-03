@@ -57,6 +57,8 @@ class OpenConvenanten
             'Inhoud'                      => $this->meta('Inhoud', ''),
             'Duur'                        => $this->meta('Duur', ''),
             'Datum_ondertekening'         => $this->meta('Datum_ondertekening', ''),
+            'slug'                        => \sanitize_title($this->meta('ID', '')),
+            'identifier'                  => $this->field('ID', ''),
         ];
 
         foreach ($this->asNumeric($this->meta('Bijlagen', [])) as $bijlage) {
@@ -77,7 +79,7 @@ class OpenConvenanten
             return $default;
         }
 
-        return trim($this->data[$field]);
+        return trim((string) $this->data[$field]);
     }
 
     public function meta(string $key, $default = null)
