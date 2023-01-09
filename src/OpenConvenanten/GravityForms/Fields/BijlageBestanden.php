@@ -4,7 +4,7 @@ namespace Yard\OpenConvenanten\GravityForms\Fields;
 
 class BijlageBestanden extends Field
 {
-    public function get()
+    public function get(): array
     {
         $this->fieldValue = json_decode($this->fieldValue);
 

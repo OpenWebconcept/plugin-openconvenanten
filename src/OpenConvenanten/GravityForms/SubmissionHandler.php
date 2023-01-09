@@ -71,7 +71,7 @@ class SubmissionHandler
         ]);
     }
 
-    private function setCaseNumber(int $ID)
+    private function setCaseNumber(int $ID): void
     {
         $caseNumber = get_post_meta($ID, 'convenant_ID', true);
 
