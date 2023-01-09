@@ -21,6 +21,23 @@ class GravityFormsHelpers
         return json_decode($content, true);
     }
 
+    public static function loadPostCreationFeedJSON(): ?array
+    {
+        $path = OCV_ROOT_PATH . '/gravityforms/post-creation-feed.json';
+
+        if (! file_exists($path)) {
+            return null;
+        }
+
+        $content = file_get_contents($path);
+
+        if (empty($content)) {
+            return null;
+        }
+
+        return json_decode($content, true);
+    }
+
     public static function formExists(string $title): bool
     {
         $forms = \GFAPI::get_forms();

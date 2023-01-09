@@ -30,7 +30,16 @@ class GravityFormsServiceProvider extends ServiceProvider
             return;
         }
 
-        \GFAPI::add_form($form);
+        $createdFormID = \GFAPI::add_form($form);
+
+        $postCreationFeed = GravityFormsHelpers::loadPostCreationFeedJSON();
+
+        if (null === $postCreationFeed || !is_int($createdFormID)) {
+            return;
+        }
+
+        $postCreationFeed['form_id'] = $createdFormID;
+        \GFAPI::add_feed($createdFormID, $postCreationFeed, 'gravityformsadvancedpostcreation');
     }
 
     private function loadHooks(): void
