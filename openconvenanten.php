@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Plugin Name:       Yard | OpenConvenanten
  * Plugin URI:        https://www.yard.nl/
  * Description:       Adds convenanten implementation
- * Version:           0.1.1
+ * Version:           0.1.2
  * Author:            Yard | Digital Agency
  * Author URI:        https://www.yard.nl/
  * License:           GPL-3.0
