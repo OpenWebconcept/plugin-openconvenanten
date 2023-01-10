@@ -183,7 +183,7 @@ class ItemController
         $id = (string) $request->get_param('id');
 
         $item = (new OpenConvenantenRepository)
-            ->query(apply_filters('yard/openconvenanten/rest-api/items/query/single', []));
+            ->query(apply_filters('yard/openconvenanten/rest-api/items/query/single', $request->get_params()));
         $data = $item->find($id);
 
         if (! $data) {
@@ -211,7 +211,7 @@ class ItemController
         $slug = $request->get_param('slug');
 
         $item = (new OpenConvenantenRepository)
-            ->query(apply_filters('yard/openconvenanten/rest-api/items/query/single', []))
+            ->query(apply_filters('yard/openconvenanten/rest-api/items/query/single', $request->get_params()))
             ->findBySlug($slug);
 
         if (! $item) {
