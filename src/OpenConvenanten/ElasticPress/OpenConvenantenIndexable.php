@@ -42,7 +42,7 @@ class OpenConvenantenIndexable extends Post
      *
      * @return array
      */
-    public function put_mapping()
+    public function put_mapping($return_type = 'bool')
     {
         $mapping = require $this->config->get('elasticpress.mapping.file');
 
