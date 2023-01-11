@@ -1,9 +1,9 @@
 {
-  "name": "openwoo-docs",
-  "version": "1.0.8",
-  "description": "OpenWOO docs",
+  "name": "openconvenanten-docs",
+  "version": "",
+  "description": "OpenConvenanten docs",
   "dependencies": {
-    "redoc-cli": "^0.13.2"
+    "redoc-cli": "^0.2.0"
   },
   "scripts": {
     "doc-build": "redoc-cli bundle ./specs/openapi.yaml --output ./index.html -t templates/template.hbs"
