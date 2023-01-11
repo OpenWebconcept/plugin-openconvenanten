@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\Repository;
 
@@ -122,8 +124,8 @@ abstract class Base
     public function findBySlug(string $slug)
     {
         $args = array_merge($this->queryArgs, [
-            'name'        => $slug,
-            'post_type'   => [$this->posttype],
+            'post_type'       => [$this->posttype],
+            'name'            => 'openconvenanten-' . $slug,
         ]);
 
         $this->query = new WP_Query($args);

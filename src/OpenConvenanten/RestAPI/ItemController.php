@@ -180,14 +180,14 @@ class ItemController
      */
     public function getItem(WP_REST_Request $request)
     {
-        $id = (string) $request->get_param('id');
+        $slug = (string) $request->get_param('slug');
 
         $item = (new OpenConvenantenRepository)
             ->query(apply_filters('yard/openconvenanten/rest-api/items/query/single', $request->get_params()));
-        $data = $item->find($id);
+        $data = $item->findBySlug($slug);
 
         if (! $data) {
-            return new WP_Error('no_item_found', sprintf('Item with UUID "%s" not found (anymore)', $id), [
+            return new WP_Error('no_item_found', sprintf('Item with slug "%s" not found (anymore)', $slug), [
                 'status' => 404,
             ]);
         }

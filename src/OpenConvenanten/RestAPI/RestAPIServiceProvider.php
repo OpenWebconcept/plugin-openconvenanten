@@ -66,15 +66,15 @@ class RestAPIServiceProvider extends ServiceProvider
     public function registerRoutes()
     {
         \register_rest_route($this->namespace, 'items', [
-            'methods'  => \WP_REST_Server::READABLE,
-            'callback' => [new ItemController($this->plugin), 'getItems'],
-            'permission_callback' => '__return_true'
+            'methods'             => \WP_REST_Server::READABLE,
+            'callback'            => [new ItemController($this->plugin), 'getItems'],
+            'permission_callback' => '__return_true',
         ]);
 
-        \register_rest_route($this->namespace, 'items/(?P<id>\d+)', [
-            'methods'  => \WP_REST_Server::READABLE,
-            'callback' => [new ItemController($this->plugin), 'getItem'],
-            'permission_callback' => '__return_true'
+        \register_rest_route($this->namespace, 'items/(?P<slug>[a-zA-Z0-9-]+)', [
+            'methods'             => \WP_REST_Server::READABLE,
+            'callback'            => [new ItemController($this->plugin), 'getItem'],
+            'permission_callback' => '__return_true',
         ]);
     }
 
