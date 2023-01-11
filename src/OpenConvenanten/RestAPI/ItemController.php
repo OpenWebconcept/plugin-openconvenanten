@@ -120,6 +120,18 @@ class ItemController
         ], $items->getQuery());
     }
 
+    public function getLatestItems(WP_REST_Request $request): Response
+    {
+        $items = (new OpenConvenantenRepository())
+            ->query(apply_filters('yard/openconvenanten/rest-api/items/query', $this->getFilters($request)));
+
+        $data = $items->latest();
+
+        return new Response([
+            'Convenantenverzoeken' => $data,
+        ], $items->getQuery());
+    }
+
     protected function getFilters(WP_REST_Request $request): array
     {
         $filters = array_filter(array_map(function ($filter) {

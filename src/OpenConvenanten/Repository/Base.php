@@ -92,6 +92,25 @@ abstract class Base
     }
 
     /**
+     * Get the latest items from the database.
+     *
+     * @param int $limit
+     *
+     * @return array
+     */
+    public function latest(int $limit = 10): array
+    {
+        $args = array_merge($this->queryArgs, [
+            'post_type'      => [$this->posttype],
+            'posts_per_page' => $limit,
+        ]);
+
+        $this->query = new WP_Query($args);
+
+        return array_map([$this, 'transform'], $this->getQuery()->posts);
+    }
+
+    /**
      * Find a particular OpenConvenant item by ID.
      *
      * @param int $id
