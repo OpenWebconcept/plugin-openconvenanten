@@ -26,6 +26,7 @@ class OpenConvenantenServiceProvider extends ServiceProvider
         $this->plugin->loader->addAction('init', $this, 'registerPostTypes');
         $this->plugin->loader->addAction('init', $this, 'registerTaxonomies');
         $this->plugin->loader->addAction('pre_get_posts', $this, 'orderByPublishedDate');
+        $this->plugin->loader->addAction('transition_post_status', $this, 'updatePostName', 10, 3);
         $this->plugin->loader->addFilter('rwmb_meta_boxes', $this, 'registerMetaboxes', 10, 1);
         (new RestAPIServiceProvider($this->plugin))->register();
     }
@@ -54,7 +55,7 @@ class OpenConvenantenServiceProvider extends ServiceProvider
         }
 
         $information = \get_post_meta($post, 'convenanten_Convenantverzoek_informatie', true);
-        $timestamp = $information['convenant_Tijdstip_laatste_wijziging']['timestamp'] ?? null;
+        $timestamp   = $information['convenant_Tijdstip_laatste_wijziging']['timestamp'] ?? null;
 
         \update_post_meta($post, 'updated_at', $timestamp);
         if (! \metadata_exists('post', $post, 'convenant_UUID')) {
@@ -63,8 +64,8 @@ class OpenConvenantenServiceProvider extends ServiceProvider
                 mt_rand(0, 0xffff),
                 mt_rand(0, 0xffff),
                 mt_rand(0, 0xffff),
-                mt_rand(0, 0x0fff)|0x4000,
-                mt_rand(0, 0x3fff)|0x8000,
+                mt_rand(0, 0x0fff) | 0x4000,
+                mt_rand(0, 0x3fff) | 0x8000,
                 mt_rand(0, 0xffff),
                 mt_rand(0, 0xffff),
                 mt_rand(0, 0xffff)
@@ -128,7 +129,7 @@ class OpenConvenantenServiceProvider extends ServiceProvider
             'has_archive'        => false,
             'hierarchical'       => false,
             'menu_position'      => null,
-            'supports'           => ['author', 'excerpt']
+            'supports'           => ['author', 'excerpt'],
         ]);
     }
 
@@ -142,6 +143,26 @@ class OpenConvenantenServiceProvider extends ServiceProvider
 
         foreach ($taxonomies as $taxonomyName => $taxonomy) {
             \register_taxonomy($taxonomyName, $taxonomy['object_types'], $taxonomy['args']);
+        }
+    }
+
+    public function updatePostName($new_status, $old_status, $post): void
+    {
+        if (self::POSTTYPE !== $post->post_type) {
+            return;
+        }
+
+        if ('publish' !== $new_status) {
+            return;
+        }
+
+        $postName = \sanitize_title($post->post_title);
+
+        if ($postName !== $post->post_name) {
+            \wp_update_post([
+                'ID'        => $post->ID,
+                'post_name' => $postName,
+            ]);
         }
     }
 }
