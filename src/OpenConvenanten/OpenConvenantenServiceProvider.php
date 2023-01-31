@@ -156,7 +156,7 @@ class OpenConvenantenServiceProvider extends ServiceProvider
             return;
         }
 
-        $postName = \sanitize_title($post->post_title);
+        $postName = 'openconvenanten-' . \sanitize_title($post->post_title);
 
         if ($postName !== $post->post_name) {
             \wp_update_post([
