@@ -29,11 +29,11 @@ abstract class Field
     {
         $metaField = $this->getMetaField($this->key);
         
-        if (! $metaField) {
+        if (! empty($metaField['value'])) {
             return null;
         }
         
-        return $this->entry[$metaField['value']];
+        return $this->entry[$metaField['value']] ?? null;
     }
     
     protected function getMetaField(string $key): ?array
