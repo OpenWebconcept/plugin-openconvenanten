@@ -29,7 +29,7 @@ abstract class Field
     {
         $metaField = $this->getMetaField($this->key);
         
-        if (! empty($metaField['value'])) {
+        if (empty($metaField['value'])) {
             return null;
         }
         
