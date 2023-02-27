@@ -26,6 +26,7 @@ class BijlageBestanden extends Field
             return [
                 'convenant_Bijlagen_Bestand' => $mediaId,
                 'convenant_Bijlagen_Naam'    => get_the_title($mediaId),
+                // 'convenant_Bijlagen_URL'     => '',
             ];
         }, $this->fieldValue);
 
@@ -35,12 +36,16 @@ class BijlageBestanden extends Field
     private function mediaIdFromUrl($url): ?int
     {
         $url    = preg_replace('/\/gravity_forms\/[a-z0-9-]+\//', '/', $url);
-        $postId = attachment_url_to_postid($url);
+        $postId = \attachment_url_to_postid($url);
 
-        if (! $postId) {
-            return null;
+        if (0 !== $postId) {
+            return $postId;
         }
 
-        return $postId;
+        // try again but add -scaled to the end before the extension
+        $url    = preg_replace('/(\.[a-z0-9]+)$/', '-scaled$1', $url);
+        $postId = \attachment_url_to_postid($url);
+
+        return 0 !== $postId ? $postId : null;
     }
 }
