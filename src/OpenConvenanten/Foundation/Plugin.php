@@ -11,50 +11,32 @@ namespace Yard\OpenConvenanten\Foundation;
  */
 class Plugin
 {
-
     /**
      * Name of the plugin.
-     *
-     * @var string
      */
-    const NAME = OCV_SLUG;
+    public const NAME = OCV_SLUG;
 
     /**
      * Version of the plugin.
      * Used for setting versions of enqueue scripts and styles.
-     *
-     * @var string VERSION
      */
-    const VERSION = OCV_VERSION;
+    public const VERSION = OCV_VERSION;
 
     /**
      * Path to the root of the plugin.
-     *
-     * @var string
      */
-    protected $rootPath;
+    public string $rootPath;
 
     /**
      * Instance of the configuration repository.
-     *
-     * @var \Yard\OpenConvenanten\Foundation\Config
      */
-    public $config;
+    public Config $config;
 
     /**
      * Instance of the Hook loader.
-     *
-     * @var Loader
      */
-    public $loader;
+    public Loader $loader;
 
-    /**
-     * Constructor of the BasePlugin
-     *
-     * @param string $rootPath
-     *
-     * @return void
-     */
     public function __construct(string $rootPath)
     {
         $this->rootPath = $rootPath;
@@ -64,21 +46,20 @@ class Plugin
 
         $this->config = new Config($this->rootPath . '/config');
         $this->config->setProtectedNodes(['core']);
+        $this->config->boot();
     }
 
     /**
      * Boot the plugin.
      *
      * @hook plugins_loaded
-     *
-     * @return bool
      */
     public function boot(): bool
     {
         $dependencyChecker = new DependencyChecker(
+            new DismissableAdminNotice,
             $this->config->get('dependencies.required'),
-            $this->config->get('dependencies.suggested'),
-            new DismissableAdminNotice
+            $this->config->get('dependencies.suggested')
         );
 
         if ($dependencyChecker->hasFailures()) {
@@ -116,10 +97,8 @@ class Plugin
 
     /**
      * Allows for hooking into the plugin name.
-     *
-     * @return void
      */
-    public function filterPlugin()
+    public function filterPlugin(): void
     {
         \do_action('yard/' . self::NAME . '/plugin', $this);
     }

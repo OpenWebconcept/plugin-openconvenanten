@@ -9,12 +9,10 @@ use Yard\OpenConvenanten\Models\OpenConvenanten as OpenConvenantenModel;
  */
 class OpenConvenantenRepository extends Base
 {
-    protected $posttype = 'openconvenant-item';
+    protected string $posttype = 'openconvenant-item';
 
     /** @inheritdoc */
-    protected $model = OpenConvenantenModel::class;
-
-    protected static $globalFields = [];
+    protected string $model = OpenConvenantenModel::class;
 
     /**
      * Add additional query arguments.

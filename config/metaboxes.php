@@ -47,12 +47,12 @@ return [
         'fields'     => [
             [
                 'name' => __('Zaaknummer', OCV_LANGUAGE_DOMAIN),
-                'id'   => 'convenant_ID',
+                'id'   => 'convenant_Zaaknummer',
                 'type' => 'text',
             ],
             [
-                'name' => __('Titel', OCV_LANGUAGE_DOMAIN),
-                'id'   => 'convenant_Titel',
+                'name' => __('Onderwerp', OCV_LANGUAGE_DOMAIN),
+                'id'   => 'convenant_Onderwerp',
                 'type' => 'text',
             ],
             [
@@ -62,9 +62,9 @@ return [
             ],
             [
                 'name'              => 'Partijen',
-                'id'                => 'convenant_Partijen',
+                'id'                => 'convenant_Partijen_bij_convenant',
                 'type'              => 'group',
-                'clone_as_multiple' => true,
+                // 'clone_as_multiple' => true,
                 'clone'             => true,
                 'fields'            => [
                     [
@@ -73,11 +73,6 @@ return [
                         'type' => 'text',
                     ],
                 ],
-            ],
-            [
-                'name' => __('Onderwerp', OCV_LANGUAGE_DOMAIN),
-                'id'   => 'convenant_Onderwerp',
-                'type' => 'text',
             ],
             [
                 'name'    => __('Beleidsterrein', OCV_LANGUAGE_DOMAIN),
@@ -99,7 +94,7 @@ return [
             ],
             [
                 'name' => __('Duur', OCV_LANGUAGE_DOMAIN),
-                'id'   => 'convenant_Duur',
+                'id'   => 'convenant_Duur_van_het_convenant',
                 'type' => 'text',
             ],
             [
@@ -108,34 +103,23 @@ return [
                 'type' => 'date',
             ],
             [
-                'name' => __('Inhoud', OCV_LANGUAGE_DOMAIN),
-                'id'   => 'convenant_Inhoud',
-                'type' => 'textarea',
-            ],
-            [
                 'name'              => __('Bijlagen', OCV_LANGUAGE_DOMAIN),
-                'id'                => 'convenant_Bijlagen',
+                'id'                => 'convenant_Bijlagen_bestanden',
                 'desc'              => 'Bijlagen kunnen worden toegevoegd als URL of als bestand. Als beide aanwezig zijn, wordt het bestand getoond.',
                 'type'              => 'group',
-                'clone_as_multiple' => true,
                 'clone'             => true,
                 'fields'            => [
-                    [
-                        'name'             => __('Bestand', OCV_LANGUAGE_DOMAIN),
-                        'id'               => 'convenant_Bijlagen_Bestand',
-                        'type'             => 'file',
-                        'max_file_uploads' => 1,
-                    ],
-                    [
-                        'name' => __('URL', OCV_LANGUAGE_DOMAIN),
-                        'id'   => 'convenant_Bijlagen_URL',
-                        'type' => 'text',
-                    ],
                     [
                         'name' => __('Naam', OCV_LANGUAGE_DOMAIN),
                         'id'   => 'convenant_Bijlagen_Naam',
                         'type' => 'text',
                     ],
+                    [
+                        'name'             => __('Bestand', OCV_LANGUAGE_DOMAIN),
+                        'id'               => 'convenant_Bijlagen_Bestand',
+                        'type'             => 'file',
+                        'max_file_uploads' => 1,
+                    ]
                 ],
             ],
         ],

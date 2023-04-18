@@ -4,45 +4,20 @@ namespace Yard\OpenConvenanten\Foundation;
 
 class DependencyChecker
 {
-    /**
-     * Plugins that need to be checked for.
-     *
-     * @var array
-     */
-    private $dependencies = [];
+    protected DismissableAdminNotice $dismissableAdminNotice;
+    private array $dependencies = [];
+    private array $suggestions = [];
+    private array $failed = [];
 
-    /**
-     * Build up array of failed plugins, either because
-     * they have the wrong version or are inactive.
-     *
-     * @var array
-     */
-    private $failed = [];
-
-    /** @var array */
-    private $suggestions = [];
-
-    /** @var DismissableAdminNotice */
-    protected $dismissableAdminNotice;
-
-    /**
-     * Determine which plugins need to be present.
-     *
-     * @param array $dependencies
-     * @param array $suggestions
-     * @param DismissableAdminNotice $dismissableAdminNotice
-     */
-    public function __construct(array $dependencies, array $suggestions = [], DismissableAdminNotice $dismissableAdminNotice)
+    public function __construct(DismissableAdminNotice $dismissableAdminNotice, array $dependencies, array $suggestions = [])
     {
+        $this->dismissableAdminNotice = $dismissableAdminNotice;
         $this->dependencies = $dependencies;
         $this->suggestions = $suggestions;
-        $this->dismissableAdminNotice = $dismissableAdminNotice;
     }
 
     /**
      * Determines if the dependencies are not met.
-     *
-     * @return bool
      */
     public function hasFailures(): bool
     {
@@ -64,8 +39,6 @@ class DependencyChecker
 
     /**
      * Determines if the dependencies are not met.
-     *
-     * @return bool
      */
     public function hasSuggestions(): bool
     {
@@ -88,8 +61,6 @@ class DependencyChecker
     /**
      * Notifies the administrator which plugins need to be enabled,
      * or which plugins have the wrong version.
-     *
-     * @return void
      */
     public function notifyFailed(): void
     {
@@ -113,8 +84,6 @@ class DependencyChecker
     /**
      * Notifies the administrator which plugins need to be enabled,
      * or which plugins have the wrong version.
-     *
-     * @return void
      */
     public function notifySuggestions(): void
     {
@@ -140,11 +109,6 @@ class DependencyChecker
 
     /**
      * Marks a dependency as failed.
-     *
-     * @param array  $dependency
-     * @param string $defaultMessage
-     *
-     * @return void
      */
     private function markFailed(array $dependency, string $defaultMessage): void
     {
@@ -155,12 +119,8 @@ class DependencyChecker
 
     /**
      * Checks if required class exists.
-     *
-     * @param array $dependency
-     *
-     * @return void
      */
-    private function checkClass(array $dependency)
+    private function checkClass(array $dependency): void
     {
         if (! class_exists($dependency['name'])) {
             $this->markFailed($dependency, __('Class does not exist', OCV_LANGUAGE_DOMAIN));
@@ -171,10 +131,6 @@ class DependencyChecker
 
     /**
      * Check if a plugin is enabled and has the correct version.
-     *
-     * @param array $dependency
-     *
-     * @return void
      */
     private function checkPlugin(array $dependency): void
     {
@@ -213,10 +169,6 @@ class DependencyChecker
 
     /**
      * Checks the installed version of the plugin.
-     *
-     * @param array $dependency
-     *
-     * @return bool
      */
     private function checkVersion(array $dependency): bool
     {

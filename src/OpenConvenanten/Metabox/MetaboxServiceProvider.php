@@ -2,7 +2,9 @@
 
 namespace Yard\OpenConvenanten\Metabox;
 
-class MetaboxServiceProvider extends MetaboxBaseServiceProvider
+use Yard\OpenConvenanten\Foundation\ServiceProvider;
+
+class MetaboxServiceProvider extends ServiceProvider
 {
     public function register()
     {
@@ -11,20 +13,11 @@ class MetaboxServiceProvider extends MetaboxBaseServiceProvider
 
     /**
      * Register metaboxes.
-     *
-     * @param $rwmbMetaboxes
-     *
-     * @return array
      */
-    public function registerMetaboxes($rwmbMetaboxes)
+    public function registerMetaboxes(array $rwmbMetaboxes): array
     {
-        $configMetaboxes = $this->plugin->config->get('metaboxes');
-        $metaboxes = [];
+        $metaboxes = $this->plugin->config->get('metaboxes') ?? [];
 
-        foreach ($configMetaboxes as $metabox) {
-            $metaboxes[] = $this->processMetabox($metabox);
-        }
-
-        return array_merge($rwmbMetaboxes, apply_filters("yard/openconvenanten/before-register-metaboxes", $metaboxes));
+        return array_merge($rwmbMetaboxes, \apply_filters('yard/openconvenanten/before-register-metaboxes', $metaboxes));
     }
 }

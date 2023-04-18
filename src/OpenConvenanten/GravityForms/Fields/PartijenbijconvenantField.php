@@ -2,20 +2,20 @@
 
 namespace Yard\OpenConvenanten\GravityForms\Fields;
 
-class Partijen extends Field
+class PartijenbijconvenantField extends Field
 {
     public function get(): array
     {
-        if (empty($this->fieldValue)) {
+        $unserialized = maybe_unserialize($this->value);
+
+        if(! $unserialized) {
             return [];
         }
-
-        $exploded = explode(',', $this->fieldValue);
 
         return array_map(function ($value) {
             return [
                 'convenant_Partijen_Naam' => trim($value),
             ];
-        }, $exploded);
+        }, $unserialized);
     }
 }

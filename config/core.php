@@ -16,7 +16,7 @@ return [
          * Providers specific to the admin.
          */
         'admin' => [
-
+            Yard\OpenConvenanten\Metabox\MetaboxServiceProvider::class
         ],
         'cli'   => [
         ],

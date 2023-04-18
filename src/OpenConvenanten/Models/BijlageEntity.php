@@ -6,22 +6,21 @@ namespace Yard\OpenConvenanten\Models;
 
 class BijlageEntity extends AbstractEntity
 {
-    /** @var array */
-    protected $required = ['URL_Bijlage', 'Naam_Bijlage'];
+    protected array $required = ['URL_Bijlage', 'Naam_Bijlage'];
 
     protected function data(): array
     {
-        if (! empty($this->data[self::PREFIX . 'Bijlagen_Bestand']) && is_array($this->data[self::PREFIX . 'Bijlagen_Bestand'])) {
+        if (! empty($this->data[$this->getMetaKeyWithPrefix('Bijlagen_Bestand')]) && is_array($this->data[$this->getMetaKeyWithPrefix('Bijlagen_Bestand')])) {
             return [
-                'URL_Bijlage'  => \wp_get_attachment_url($this->data[self::PREFIX . 'Bijlagen_Bestand'][0] ?? 0),
-                'Naam_Bijlage' => $this->data[self::PREFIX . 'Bijlagen_Naam'] ?? '',
+                'URL_Bijlage'  => \wp_get_attachment_url($this->data[$this->getMetaKeyWithPrefix('Bijlagen_Bestand')][0] ?? 0),
+                'Naam_Bijlage' => $this->data[$this->getMetaKeyWithPrefix('Bijlagen_Naam')] ?? '',
             ];
         }
 
-        if (! empty($this->data[self::PREFIX . 'Bijlagen_URL'])) {
+        if (! empty($this->data[$this->getMetaKeyWithPrefix('Bijlagen_URL')])) {
             return [
-                'URL_Bijlage'  => $this->data[self::PREFIX . 'Bijlagen_URL'] ?? '',
-                'Naam_Bijlage' => $this->data[self::PREFIX . 'Bijlagen_Naam'] ?? '',
+                'URL_Bijlage'  => $this->data[$this->getMetaKeyWithPrefix('Bijlagen_URL')] ?? '',
+                'Naam_Bijlage' => $this->data[$this->getMetaKeyWithPrefix('Bijlagen_Naam')] ?? '',
             ];
         }
 

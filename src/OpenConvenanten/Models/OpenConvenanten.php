@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\Models;
 
-use WP_Post;
-
 /**
  * @OA\Schema(
  *   title="OpenConvenanten model",
@@ -14,10 +12,7 @@ use WP_Post;
  */
 class OpenConvenanten
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
+    protected array $data = [];
 
     public function __construct(array $data = [])
     {
@@ -47,22 +42,18 @@ class OpenConvenanten
     public function transform(): array
     {
         $data = [
-            'Convenantverzoek_informatie' => InfoEntity::make($this->meta('Convenantverzoek_informatie', []))->get(),
-            'ID'                          => $this->meta('ID'),
-            'Titel'                       => $this->meta('Titel', $this->meta('ID')),
-            'Beschrijving'                => $this->field('post_content', ''),
+            'ID'                          => $this->meta('Zaaknummer'),
             'Samenvatting'                => $this->meta('Samenvatting', ''),
             'Onderwerp'                   => $this->meta('Onderwerp', ''),
             'Beleidsterrein'              => $this->meta('Beleidsterrein', ''),
-            'Partijen'                    => PartijenEntity::make($this->asNumeric($this->meta('Partijen', [])))->get(),
-            'Inhoud'                      => $this->meta('Inhoud', ''),
-            'Duur'                        => $this->meta('Duur', ''),
+            'Partijen'                    => PartijenEntity::make($this->asNumeric($this->meta('Partijen_bij_convenant', [])))->get(),
+            'Duur'                        => $this->meta('Duur_van_het_convenant', ''),
             'Datum_ondertekening'         => $this->meta('Datum_ondertekening', ''),
             'slug'                        => str_replace('openconvenanten-', '', $this->field('post_name', '')),
             'identifier'                  => $this->field('ID', ''),
         ];
 
-        foreach ($this->asNumeric($this->meta('Bijlagen', [])) as $bijlage) {
+        foreach ($this->asNumeric($this->meta('Bijlagen_bestanden', [])) as $bijlage) {
             $bijlage = maybe_unserialize($bijlage);
 
             if (BijlageEntity::make($bijlage)->get()) {

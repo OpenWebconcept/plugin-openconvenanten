@@ -40,30 +40,21 @@ use Yard\OpenConvenanten\Foundation\ServiceProvider;
  */
 class RestAPIServiceProvider extends ServiceProvider
 {
-    /**
-     * @var string
-     */
-    private $namespace = 'owc/openconvenanten/v1';
+    private string $namespace = 'owc/openconvenanten/v1';
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register(): void
     {
         $this->plugin->loader->addFilter('rest_api_init', $this, 'registerRoutes');
         $this->plugin->loader->addFilter('owc/config-expander/rest-api/whitelist', $this, 'whitelist', 10, 1);
-
-        $this->registerModelFields();
     }
 
     /**
      * Register routes on the rest API.
-     *
-     * @return void
      */
-    public function registerRoutes()
+    public function registerRoutes(): void
     {
         \register_rest_route($this->namespace, 'items', [
             'methods'             => \WP_REST_Server::READABLE,
@@ -102,23 +93,5 @@ class RestAPIServiceProvider extends ServiceProvider
         ];
 
         return $whitelist;
-    }
-
-    /**
-     * Register fields for all configured posttypes.
-     *
-     * @return void
-     */
-    private function registerModelFields(): void
-    {
-        // Add global fields for all Models.
-        foreach ($this->plugin->config->get('api.models') as $posttype => $data) {
-            foreach ($data['fields'] as $key => $creator) {
-                $class = '\Yard\OpenConvenanten\Models\\' . ucfirst($posttype);
-                if (class_exists($class)) {
-                    $class::addGlobalField($key, new $creator($this->plugin));
-                }
-            }
-        }
     }
 }

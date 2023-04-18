@@ -6,20 +6,19 @@ namespace Yard\OpenConvenanten\Models;
 
 class PartijenEntity extends AbstractEntity
 {
-    /** @var array */
-    protected $required = ['Naam'];
+    protected array $required = ['Naam'];
 
     protected function data(): array
     {
         return array_filter(array_map(function ($item) {
             $item = maybe_unserialize($item);
 
-            if (empty($item[self::PREFIX . 'Partijen_Naam'])) {
+            if (empty($item[$this->getMetaKeyWithPrefix('Partijen_Naam')])) {
                 return null;
             }
         
             return [
-                'Naam' => $item[self::PREFIX . 'Partijen_Naam'] ?? '',
+                'Naam' => $item[$this->getMetaKeyWithPrefix('Partijen_Naam')] ?? '',
             ];
         }, $this->data));
     }

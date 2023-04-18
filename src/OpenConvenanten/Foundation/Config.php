@@ -6,53 +6,50 @@ class Config
 {
     /**
      * Directory where config files are located.
-     *
-     * @var string
      */
-    protected $path;
+    protected string $path;
 
     /**
      * Array with names of protected nodes in the config-items.
-     *
-     * @var array
      */
-    protected $protectedNodes = [];
+    protected array $protectedNodes = [];
 
     /**
      * Array with all the config values.
-     *
-     * @var array
      */
-    protected $items = [];
+    protected array $items = [];
 
     /**
      * Config repository constructor.
      *
      * Boot the configuration files and get all the files from the
      * config directory and add them to the config array.
-     *
-     * @param string $path Path to the configuration files.
-     * @param array  $items
      */
     public function __construct($path, array $items = [])
     {
         $this->items = $items;
         $this->path = $path;
+    }
+
+    /**
+     * Boot up the configuration repository.
+     */
+    public function boot(): void
+    {
         $this->scanDirectory($this->getPath());
     }
 
     /**
      * Retrieve a specific config value from the configuration repository.
      *
-     * @param string $setting
-     * @param string $default
+     * @param $setting
      *
      * @return array|mixed
      */
-    public function get(string $setting, $default = '')
+    public function get($setting)
     {
         if (! $setting) {
-            return $default;
+            return $this->all();
         }
 
         $parts = explode('.', $setting);
@@ -71,12 +68,10 @@ class Config
      *
      * @param  array|string $key
      * @param  mixed        $value
-     *
-     * @return void
      */
-    public function set($key, $value = null)
+    public function set($key, $value = null): void
     {
-        $keys = is_array($key) ? $key : [$key => $value];
+        $keys = is_array($key) ? $key : [ $key => $value ];
 
         $tempItems = &$this->items;
 
@@ -103,8 +98,6 @@ class Config
 
     /**
      * Return all config values.
-     *
-     * @return array
      */
     public function all(): array
     {
@@ -113,8 +106,6 @@ class Config
 
     /**
      * Get the path where the files will be fetched from.
-     *
-     * @return string
      */
     public function getPath(): string
     {
@@ -123,45 +114,30 @@ class Config
 
     /**
      * Sets the path where the config files are fetched from.
-     *
-     * @param string $path
-     *
-     * @return self
      */
-    public function setPath(string $path): self
+    public function setPath(string $path)
     {
         $this->path = $path;
-
-        return $this;
     }
 
     /**
-     * @param array $nodes
-     *
-     * @return self
+     * Some nodes must not be changed by outside interference.
      */
-    public function setProtectedNodes($nodes = []): self
+    public function setProtectedNodes(array $nodes = [])
     {
         $this->protectedNodes = $nodes;
-
-        return $this;
     }
 
     /**
-     * @param string $path
-     *
-     * @return void
+     * Scan a given directory for certain files.
      */
-    private function scanDirectory(string $path): void
+    private function scanDirectory(string $path)
     {
-        $files = glob($path . '/*', GLOB_NOSORT);
-
-        if (false === $files) {
-            return;
-        }
+        $files = glob($path.'/*', GLOB_NOSORT);
 
         foreach ($files as $file) {
             $fileType = filetype($file);
+
             if ("dir" == $fileType) {
                 $this->scanDirectory($file);
             } else {
@@ -171,18 +147,17 @@ class Config
                 // If its in the first directory just add the file.
                 if ($path == $this->path) {
                     $this->items[$name] = $value;
-
                     continue;
                 }
 
                 // Get the path from the starting path.
-                $path = str_replace($this->path . '/', '', $path);
+                $path = str_replace($this->path.'/', '', $path);
 
                 // Build an array from the path.
                 $items = [];
                 $items[$name] = $value;
                 foreach (array_reverse(explode('/', $path)) as $key) {
-                    $items = [$key => $items];
+                    $items = [ $key => $items ];
                 }
 
                 // Merge it recursively into items

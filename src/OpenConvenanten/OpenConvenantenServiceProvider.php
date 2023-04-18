@@ -27,7 +27,6 @@ class OpenConvenantenServiceProvider extends ServiceProvider
         $this->plugin->loader->addAction('init', $this, 'registerTaxonomies');
         $this->plugin->loader->addAction('pre_get_posts', $this, 'orderByPublishedDate');
         $this->plugin->loader->addAction('transition_post_status', $this, 'updatePostName', 10, 3);
-        $this->plugin->loader->addFilter('rwmb_meta_boxes', $this, 'registerMetaboxes', 10, 1);
         (new RestAPIServiceProvider($this->plugin))->register();
     }
 
@@ -40,7 +39,7 @@ class OpenConvenantenServiceProvider extends ServiceProvider
             return $post;
         }
 
-        $post['post_title'] = isset($_POST['convenant_Titel']) ? \esc_attr($_POST['convenant_Titel']) : $post['post_title'];
+        $post['post_title'] = isset($_POST['convenant_Onderwerp']) ? \esc_attr($_POST['convenant_Onderwerp']) : $post['post_title'];
 
         return $post;
     }
@@ -71,20 +70,6 @@ class OpenConvenantenServiceProvider extends ServiceProvider
                 mt_rand(0, 0xffff)
             ));
         }
-    }
-
-    /**
-     * Register metaboxes.
-     *
-     * @param $rwmbMetaboxes
-     *
-     * @return array
-     */
-    public function registerMetaboxes($rwmbMetaboxes)
-    {
-        $metaboxes = $this->plugin->config->get('metaboxes') ?? [];
-
-        return array_merge($rwmbMetaboxes, \apply_filters('yard/openconvenanten/before-register-metaboxes', $metaboxes));
     }
 
     /**

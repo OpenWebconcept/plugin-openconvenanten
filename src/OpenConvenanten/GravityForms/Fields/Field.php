@@ -5,46 +5,17 @@ namespace Yard\OpenConvenanten\GravityForms\Fields;
 abstract class Field
 {
     protected string $key;
-    protected array $metadata;
-    protected array $entry;
-    protected $fieldValue;
+    protected $value;
 
-    public function __construct(string $key, array $metadata, array $entry)
+    public function __construct(string $key, $value)
     {
-        $this->key        = $key;
-        $this->metadata   = $metadata;
-        $this->entry      = $entry;
-        $this->fieldValue = $this->value($key);
+        $this->key   = $key;
+        $this->value = $value;
     }
 
-    public static function make(string $key, array $metadata, array $entry)
+    public static function make(string $key, $value): self
     {
-        return new static($key, $metadata, $entry);
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function value(string $key)
-    {
-        $metaField = $this->getMetaField($this->key);
-        
-        if (empty($metaField['value'])) {
-            return null;
-        }
-        
-        return $this->entry[$metaField['value']] ?? null;
-    }
-    
-    protected function getMetaField(string $key): ?array
-    {
-        foreach ($this->metadata as $metaField) {
-            if ($metaField['custom_key'] === $key || $metaField['key'] === $key) {
-                return $metaField;
-            }
-        }
-        
-        return null;
+        return new static($key, $value);
     }
 
     /**

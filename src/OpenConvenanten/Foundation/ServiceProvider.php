@@ -1,30 +1,13 @@
-<?php declare(strict_types=1);
-/**
- * Provider which handles the registration of the plugin.
- */
+<?php
+
+declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\Foundation;
 
-/**
- * Provider which handles the registration of the plugin.
- */
 abstract class ServiceProvider
 {
+    protected Plugin $plugin;
 
-    /**
-     * Instance of the plugin.
-     *
-     * @var \Yard\OpenConvenanten\Foundation\Plugin
-     */
-    protected $plugin;
-
-    /**
-     * Construction of the service provider.
-     *
-     * @param Plugin $plugin
-     *
-     * @return void
-     */
     public function __construct(Plugin $plugin)
     {
         $this->plugin = $plugin;

@@ -2,107 +2,84 @@
 
 namespace Yard\OpenConvenanten\GravityForms;
 
-use Yard\OpenConvenanten\GravityForms\Fields\BijlageBestanden;
-use Yard\OpenConvenanten\GravityForms\Fields\BijlageURLS;
-use Yard\OpenConvenanten\GravityForms\Fields\Partijen;
-use Yard\OpenConvenanten\GravityForms\Fields\Title;
-
 class SubmissionHandler
 {
-    public function transform(int $ID, array $feed, array $entry, array $form): void
+    private array $entry;
+    private array $form;
+
+    public function __construct($entry, $form)
     {
-        if (! $this->isOpenConvenantForm($form)) {
+        $this->entry = $entry;
+        $this->form  = $form;
+    }
+
+    public static function make($entry, $form): self
+    {
+        return new static($entry, $form);
+    }
+
+    public function handle(): void
+    {
+        if (! $this->isOpenConvenantForm()) {
             return;
         }
-    
-        $metaFields  = rgars($feed, 'meta/postMetaFields');
 
-        $attachments = $this->getAttachments($metaFields, $entry);
-        $parties     = $this->getParties($metaFields, $entry);
+        $enteredValues = $this->getEnteredValues();
 
-        $this->updatePostMeta($ID, array_merge($attachments, $parties));
-        $this->updatePostTitle($ID, $metaFields, $entry);
-        $this->setCaseNumber($ID);
+        $this->savePost($enteredValues);
     }
 
-    private function getAttachments(array $metadata, array $entry): array
+    /**
+     * Gets key value pairs of labels and entered values.
+     */
+    private function getEnteredValues(): array
     {
-        return [
-            'convenant_Bijlagen' => array_merge(
-                BijlageURLS::make('convenant_BijlageURLS', $metadata, $entry)->get(),
-                BijlageBestanden::make('convenant_BijlageBestanden', $metadata, $entry)->get()
-            ),
-        ];
-    }
+        $mapping = $this->getMapping();
+        $values  = [];
+        foreach ($this->entry as $key => $value) {
+            if (! is_numeric($key)) {
+                continue;
+            }
 
-    private function getParties(array $metadata, array $entry): array
-    {
-        $key = 'convenant_Partijen';
-
-        return [
-            $key => Partijen::make($key, $metadata, $entry)->get(),
-        ];
-    }
-
-    private function updatePostMeta(int $ID, array $meta): void
-    {
-        foreach ($meta as $key => $value) {
-            delete_post_meta($ID, $key);
+            $values[$mapping[$key]] = $value;
         }
 
-        foreach ($meta as $key => $value) {
-            if (! is_array($value)) {
-                add_post_meta($ID, $key, $value);
+        return $values;
+    }
+
+    /**
+     * Transforms the form fields into a key value pair of field id and label
+     */
+    private function getMapping(): array
+    {
+        $mapping = [];
+
+        foreach ($this->form['fields'] as $field) {
+            if (empty($field['id']) || empty($field['label'])) {
+                continue;
+            }
+
+            if (empty($field['inputs'])) {
+                $mapping[$field['id']] = $field['label'];
 
                 continue;
             }
 
-            foreach ($value as $subValue) {
-                add_post_meta($ID, $key, $subValue);
+            foreach ($field['inputs'] as $input) {
+                $mapping[$input['id']] = $input['label'];
             }
         }
+
+        return $mapping;
     }
 
-    private function updatePostTitle(int $ID, array $metadata, array $entry): void
+    private function savePost(array $values): int
     {
-        wp_update_post([
-            'ID'         => $ID,
-            'post_title' => Title::make('convenant_Titel', $metadata, $entry)->get(),
-        ]);
+        return PostBuilder::make($values)->save();
     }
 
-    private function setCaseNumber(int $ID): void
+    private function isOpenConvenantForm(): bool
     {
-        $caseNumber = get_post_meta($ID, 'convenant_ID', true);
-
-        if ($caseNumber) {
-            return;
-        }
-
-        $caseNumber = $this->createUUID();
-
-        $this->updatePostMeta($ID, [
-            'convenant_ID' => $caseNumber,
-        ]);
-    }
-
-    private function isOpenConvenantForm($form): bool
-    {
-        return strpos($form['title'] ?? '', 'OpenConvenant') !== false;
-    }
-
-    private function createUUID(): string
-    {
-        return sprintf(
-            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-            mt_rand(0, 0xffff),
-            mt_rand(0, 0xffff),
-            mt_rand(0, 0xffff),
-            mt_rand(0, 0x0fff) | 0x4000,
-            mt_rand(0, 0x3fff) | 0x8000,
-            mt_rand(0, 0xffff),
-            mt_rand(0, 0xffff),
-            mt_rand(0, 0xffff)
-        );
+        return strpos($this->form['cssClass'] ?? '', 'convenanten') !== false;
     }
 }

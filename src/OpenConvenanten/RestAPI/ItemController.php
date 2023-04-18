@@ -210,28 +210,4 @@ class ItemController
             ],
         ], $item->getQuery());
     }
-
-    /**
-     * Get an individual post item by slug.
-     *
-     * @param WP_REST_Request $request
-     *
-     * @return array|WP_Error
-     */
-    public function getItemBySlug(WP_REST_Request $request)
-    {
-        $slug = $request->get_param('slug');
-
-        $item = (new OpenConvenantenRepository)
-            ->query(apply_filters('yard/openconvenanten/rest-api/items/query/single', $request->get_params()))
-            ->findBySlug($slug);
-
-        if (! $item) {
-            return new WP_Error('no_item_found', sprintf('Item with slug "%s" not found', $slug), [
-                'status' => 404,
-            ]);
-        }
-
-        return $item;
-    }
 }

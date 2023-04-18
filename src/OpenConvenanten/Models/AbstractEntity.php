@@ -8,11 +8,8 @@ abstract class AbstractEntity
 {
     const PREFIX = 'convenant_';
 
-    /** @var array */
-    protected $data = [];
-
-    /** @var array */
-    protected $required = [];
+    protected array $data = [];
+    protected array $required = [];
 
     public function __construct(array $data = [])
     {
@@ -22,6 +19,11 @@ abstract class AbstractEntity
     public static function make(array $data = []): self
     {
         return new static($data);
+    }
+
+    public function getMetaKeyWithPrefix(string $key)
+    {
+        return sprintf('%s%s', self::PREFIX, $key);
     }
 
     abstract protected function data();
