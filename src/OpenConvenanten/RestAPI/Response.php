@@ -14,7 +14,9 @@ class Response extends WP_REST_Response
      * @OA\Property(
      *   property="Convenantenverzoeken",
      *   type="array",
+     *
      *   @OA\Items(ref="#/components/schemas/OpenConvenanten"),
+     *
      *   @OA\Link(link="OpenConvenantenRepository", ref="#/components/links/OpenConvenantenRepository")
      * )
      */
@@ -34,6 +36,7 @@ class Response extends WP_REST_Response
      * @OA\Property(
      *   property="pagination",
      *   type="array",
+     *
      *   @OA\Items(
      *
      *   )
@@ -46,11 +49,11 @@ class Response extends WP_REST_Response
 
         return [
             'pagination' => [
-                'total'                   => (int) $query->found_posts,
-                'limit'                   => (int) $query->get('posts_per_page'),
-                'pages'                   => [
-                    'total'              => (int) $query->max_num_pages,
-                    'current'            => (int) $page,
+                'total' => (int) $query->found_posts,
+                'limit' => (int) $query->get('posts_per_page'),
+                'pages' => [
+                    'total' => (int) $query->max_num_pages,
+                    'current' => (int) $page,
                 ]
             ]
         ];
@@ -64,7 +67,7 @@ class Response extends WP_REST_Response
     protected function getQuery(WP_Query $query): array
     {
         return [
-            'query_parameters'        => $query->query
+            'query_parameters' => $query->query
         ];
     }
 }

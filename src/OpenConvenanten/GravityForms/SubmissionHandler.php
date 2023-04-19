@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\GravityForms;
 
@@ -10,7 +10,7 @@ class SubmissionHandler
     public function __construct($entry, $form)
     {
         $this->entry = $entry;
-        $this->form  = $form;
+        $this->form = $form;
     }
 
     public static function make($entry, $form): self
@@ -35,7 +35,7 @@ class SubmissionHandler
     private function getEnteredValues(): array
     {
         $mapping = $this->getMapping();
-        $values  = [];
+        $values = [];
         foreach ($this->entry as $key => $value) {
             if (! is_numeric($key)) {
                 continue;

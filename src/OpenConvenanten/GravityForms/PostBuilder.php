@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\GravityForms;
 
@@ -32,18 +32,18 @@ class PostBuilder
     protected function insertPost(): int
     {
         $data = [
-            'post_title'   => $this->formValues['Onderwerp'],
+            'post_title' => $this->formValues['Onderwerp'],
             'post_excerpt' => $this->formValues['Samenvatting'],
             'post_content' => '',
-            'post_status'  => $this->getPostStatus(),
-            'post_type'    => 'openconvenant-item',
+            'post_status' => $this->getPostStatus(),
+            'post_type' => 'openconvenant-item',
         ];
 
         return \wp_insert_post($data);
     }
 
     /**
-     * Allow the status to be filtered, accepts only 'draft' en 'publish'.
+     * Allow the status to be filtered, accepts only 'draft' and 'publish'.
      * Default post status is 'draft'.
      */
     protected function getPostStatus(): string
@@ -52,7 +52,6 @@ class PostBuilder
         $allowedStatusses = ['draft', 'publish'];
 
         return in_array($postStatus, $allowedStatusses) ? $postStatus : 'draft';
-
     }
 
     protected function getMetaValues(): array

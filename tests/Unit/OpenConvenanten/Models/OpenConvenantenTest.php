@@ -40,7 +40,7 @@ class OpenConvenantenTest extends TestCase
     public function if_class_is_instance_of_OpenConvenanten_class()
     {
         \WP_Mock::userFunction('get_post_meta', [
-            'times'  => 1,
+            'times' => 1,
             'return' => [],
         ]);
 

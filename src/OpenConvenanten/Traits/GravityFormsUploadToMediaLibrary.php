@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\Traits;
 
@@ -70,20 +70,17 @@ trait GravityFormsUploadToMediaLibrary
 
     protected function getFileFromGravityForms(string $url): string
     {
-        $streamOptions = [
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-            ],
-        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
-        try {
-            $externalFile = file_get_contents($url, false, stream_context_create($streamOptions));
-        } catch(\Exception $e) {
-            $externalFile = '';
-        }
+        $externalFile = curl_exec($ch);
 
-        return $externalFile;
+        curl_close($ch);
+
+        return $externalFile ?: '';
     }
 
     protected function insertAttachment(string $uploadFullPath, string $externalFile, string $uploadFilename): int
@@ -101,9 +98,9 @@ trait GravityFormsUploadToMediaLibrary
 
         $insertArgs = [
             'post_mime_type' => $filetypeWP['type'] ?? '',
-            'post_title'     => $uploadFilename,
-            'post_content'   => '',
-            'post_status'    => 'inherit',
+            'post_title' => $uploadFilename,
+            'post_content' => '',
+            'post_status' => 'inherit',
         ];
 
         $attachmentID = \wp_insert_attachment($insertArgs, $uploadFullPath);

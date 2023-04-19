@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\GravityForms\Fields;
 
@@ -8,7 +8,7 @@ class PartijenbijconvenantField extends Field
     {
         $unserialized = maybe_unserialize($this->value);
 
-        if(! $unserialized) {
+        if (! $unserialized) {
             return [];
         }
 

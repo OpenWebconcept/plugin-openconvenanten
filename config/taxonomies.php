@@ -3,7 +3,7 @@
 return [
     'openconvenanten-type' => [
         'object_types' => ['openconvenant-item'],
-        'args'         => [
+        'args' => [
             'public' => true,
             'show_in_rest' => true,
             'hierarchical' => false,

@@ -25,9 +25,9 @@ class DependencyCheckerTest extends TestCase
     {
         $dependencies = [
             [
-                'type'  => 'plugin',
+                'type' => 'plugin',
                 'label' => 'Dependency #1',
-                'file'  => 'test-plugin/test-plugin.php'
+                'file' => 'test-plugin/test-plugin.php'
             ]
         ];
 
@@ -56,15 +56,16 @@ class DependencyCheckerTest extends TestCase
 
     /**
      * @dataProvider wrongVersions
+     *
      * @test
      */
     public function it_fails_when_plugin_is_active_but_versions_mismatch($version)
     {
         $dependencies = [
             [
-                'type'    => 'plugin',
-                'label'   => 'Dependency #1',
-                'file'    => 'pluginstub.php', // tests/Unit/pluginstub.php
+                'type' => 'plugin',
+                'label' => 'Dependency #1',
+                'file' => 'pluginstub.php', // tests/Unit/pluginstub.php
                 'version' => $version // Version in pluginstub.php is 1.1.7
             ]
         ];
@@ -82,15 +83,16 @@ class DependencyCheckerTest extends TestCase
 
     /**
      * @dataProvider correctVersions
+     *
      * @test
      */
     public function it_succeeds_when_plugin_is_active_and_versions_match($version)
     {
         $dependencies = [
             [
-                'type'    => 'plugin',
-                'label'   => 'Dependency #1',
-                'file'    => 'pluginstub.php', // tests/Unit/pluginstub.php
+                'type' => 'plugin',
+                'label' => 'Dependency #1',
+                'file' => 'pluginstub.php', // tests/Unit/pluginstub.php
                 'version' => $version // Version in pluginstub.php is 1.1.7
             ]
         ];

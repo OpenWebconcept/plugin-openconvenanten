@@ -64,9 +64,9 @@ class DependencyChecker
      */
     public function notifyFailed(): void
     {
-        add_action('admin_notices', function () {
+        \add_action('admin_notices', function () {
             $list = '<p>' . __(
-                'The following plugins are required to use the OpenConvenanten:',
+                'De volgende plugins zijn vereist om gebruik te maken van de OpenConvenanten plugin:',
                 OCV_LANGUAGE_DOMAIN
             ) . '</p><ol>';
 
@@ -87,12 +87,13 @@ class DependencyChecker
      */
     public function notifySuggestions(): void
     {
-        add_action('admin_notices', function () {
+        \add_action('admin_notices', function () {
             if (! $this->dismissableAdminNotice->isAdminNoticeActive('dependency-suggestions-forever')) {
                 return;
             }
+            
             $list = '<p>' . __(
-                'The following plugins or libraries are suggested and supported to be used with the OpenConvenanten:',
+                'De volgende plugins of bibliotheken worden aangeraden en ondersteund om gebruik te maken van de OpenConvenanten plugin:',
                 OCV_LANGUAGE_DOMAIN
             ) . '</p><ol>';
 
@@ -123,7 +124,7 @@ class DependencyChecker
     private function checkClass(array $dependency): void
     {
         if (! class_exists($dependency['name'])) {
-            $this->markFailed($dependency, __('Class does not exist', OCV_LANGUAGE_DOMAIN));
+            $this->markFailed($dependency, __('Klasse bestaat niet', OCV_LANGUAGE_DOMAIN));
 
             return;
         }
@@ -139,7 +140,7 @@ class DependencyChecker
         }
 
         if (! $this->checkPluginActive($dependency)) {
-            $this->markFailed($dependency, __('Inactive', OCV_LANGUAGE_DOMAIN));
+            $this->markFailed($dependency, __('Inactief', OCV_LANGUAGE_DOMAIN));
 
             return;
         }
@@ -147,7 +148,7 @@ class DependencyChecker
         // If there is a version lock set on the dependency...
         if (isset($dependency['version'])) {
             if (! $this->checkVersion($dependency)) {
-                $this->markFailed($dependency, __('Minimal version:', OCV_LANGUAGE_DOMAIN) . ' <b>' . $dependency['version'] . '</b>');
+                $this->markFailed($dependency, __('Minimale versie:', OCV_LANGUAGE_DOMAIN) . ' <b>' . $dependency['version'] . '</b>');
             }
         }
     }

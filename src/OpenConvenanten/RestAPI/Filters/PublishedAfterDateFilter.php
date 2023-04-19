@@ -8,8 +8,8 @@ class PublishedAfterDateFilter extends AbstractFilter
     {
         return [
             'date_query' => [
-                'column'  => 'post_date',
-                'after'   => $this->value
+                'column' => 'post_date',
+                'after' => $this->value
             ]
         ];
     }

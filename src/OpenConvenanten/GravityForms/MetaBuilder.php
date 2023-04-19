@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\GravityForms;
 
@@ -21,7 +21,7 @@ class MetaBuilder
         $metaValues = [];
 
         foreach ($this->formValues as $key => $value) {
-            $key   = $this->getKey($key);
+            $key = $this->getKey($key);
             $value = $this->getMetaField($key, $value);
 
             $metaValues[$key] = $value;

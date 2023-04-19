@@ -147,6 +147,7 @@ class Config
                 // If its in the first directory just add the file.
                 if ($path == $this->path) {
                     $this->items[$name] = $value;
+
                     continue;
                 }
 

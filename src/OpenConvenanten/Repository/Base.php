@@ -44,7 +44,7 @@ abstract class Base
     public function latest(int $limit = 10): array
     {
         $args = array_merge($this->queryArgs, [
-            'post_type'      => [$this->posttype],
+            'post_type' => [$this->posttype],
             'posts_per_page' => $limit,
         ]);
 
@@ -59,8 +59,8 @@ abstract class Base
     public function findBySlug(string $slug): array
     {
         $args = array_merge($this->queryArgs, [
-            'post_type'       => [$this->posttype],
-            'name'            => sprintf('openconvenanten-%s', $slug),
+            'post_type' => [$this->posttype],
+            'name' => sprintf('openconvenanten-%s', $slug),
         ]);
 
         $this->query = new WP_Query($args);
@@ -110,11 +110,11 @@ abstract class Base
         }
 
         $data = [
-            'id'      => $post->ID,
-            'title'   => $post->post_title,
+            'id' => $post->ID,
+            'title' => $post->post_title,
             'content' => apply_filters('the_content', $post->post_content),
             'excerpt' => $post->post_excerpt,
-            'date'    => $post->post_date,
+            'date' => $post->post_date,
         ];
 
         return $data;

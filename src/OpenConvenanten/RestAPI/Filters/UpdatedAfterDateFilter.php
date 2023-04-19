@@ -10,10 +10,10 @@ class UpdatedAfterDateFilter extends AbstractFilter
             'meta_query' => [
                 [
                     [
-                        'key'        => 'updated_at',
-                        'compare'    => '>',
-                        'meta_type'  => 'DATE',
-                        'value'      => strtotime($this->value),
+                        'key' => 'updated_at',
+                        'compare' => '>',
+                        'meta_type' => 'DATE',
+                        'value' => strtotime($this->value),
                     ],
                 ]
             ]

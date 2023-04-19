@@ -10,17 +10,17 @@ class BijlageEntity extends AbstractEntity
 
     protected function data(): array
     {
-        if (! empty($this->data[$this->getMetaKeyWithPrefix('Bijlagen_Bestand')]) && is_array($this->data[$this->getMetaKeyWithPrefix('Bijlagen_Bestand')])) {
+        if (! empty($this->getFromData('Bijlagen_Bestand', ''))) {
             return [
-                'URL_Bijlage'  => \wp_get_attachment_url($this->data[$this->getMetaKeyWithPrefix('Bijlagen_Bestand')][0] ?? 0),
-                'Naam_Bijlage' => $this->data[$this->getMetaKeyWithPrefix('Bijlagen_Naam')] ?? '',
+                'URL_Bijlage' => $this->getFromData('Bijlagen_Bestand', ''),
+                'Naam_Bijlage' => $this->getFromData('Bijlagen_Naam', ''),
             ];
         }
 
-        if (! empty($this->data[$this->getMetaKeyWithPrefix('Bijlagen_URL')])) {
+        if (! empty($this->getFromData('Bijlagen_URL'))) {
             return [
-                'URL_Bijlage'  => $this->data[$this->getMetaKeyWithPrefix('Bijlagen_URL')] ?? '',
-                'Naam_Bijlage' => $this->data[$this->getMetaKeyWithPrefix('Bijlagen_Naam')] ?? '',
+                'URL_Bijlage' => $this->getFromData('Bijlagen_URL', ''),
+                'Naam_Bijlage' => $this->getFromData('Bijlagen_Naam', ''),
             ];
         }
 

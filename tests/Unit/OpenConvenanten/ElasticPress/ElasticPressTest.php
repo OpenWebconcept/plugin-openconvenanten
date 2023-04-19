@@ -69,7 +69,7 @@ class ElasticPressTest extends TestCase
     public function test_get_settings()
     {
         \WP_Mock::userFunction('get_option', [
-            'times'  => 1,
+            'times' => 1,
             'return' => [],
         ]);
 

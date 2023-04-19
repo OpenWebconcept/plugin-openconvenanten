@@ -37,11 +37,11 @@ class ItemController
             'data' => $data,
         ], [
             'pagination' => [
-                'total_count'             => (int) $query->found_posts,
-                'total_pages'             => (int) $query->max_num_pages,
-                'current_page'            => (int) $page,
-                'limit'                   => (int) $query->get('posts_per_page'),
-                'query_parameters'        => $query->query,
+                'total_count' => (int) $query->found_posts,
+                'total_pages' => (int) $query->max_num_pages,
+                'current_page' => (int) $page,
+                'limit' => (int) $query->get('posts_per_page'),
+                'query_parameters' => $query->query,
             ],
         ]);
     }
@@ -54,7 +54,7 @@ class ItemController
     {
         return array_merge($request->get_params(), [
             'posts_per_page' => (int) $request->get_param('limit') ?: ($request->get_param('per_page') ?: $limit),
-            'paged'          => $request->get_param('page') ?: 0,
+            'paged' => $request->get_param('page') ?: 0,
         ]);
     }
 
@@ -70,34 +70,42 @@ class ItemController
      *    path="/items",
      *    operationId="getItems",
      *    description="Get all openConvenanten items",
+     *
      *    @OA\Parameter(
      *      name="filter[]",
      *      in="query",
      *      description="Filter items by date of modification",
      *      example="updatedAfterDate:2021-03-01",
      *      required=false,
+     *
      *      @OA\Schema(
      *        type="array",
      *        pattern="updatedAfterDate:YYYY-MM-DD",
+     *
      *        @OA\Items(type="string"),
      *      )
      *    ),
+     *
      *    @OA\Parameter(
      *      name="filter[]",
      *      in="query",
      *      description="Filter items by date of publication",
      *      example="publishedAfterDate:2021-03-01",
      *      required=false,
+     *
      *      @OA\Schema(
      *        type="array",
      *        pattern="publishedAfterDate:YYYY-MM-DD",
+     *
      *        @OA\Items(type="string"),
      *
      *      )
      *    ),
+     *
      *    @OA\Response(
      *      response=200,
      *      description="OK",
+     *
      *      @OA\JsonContent(
      *        ref="#/components/schemas/Response"
      *      ),
@@ -157,30 +165,38 @@ class ItemController
      *    path="/items/{UUID}",
      *    operationId="getItem",
      *    description="Get openConvenanten item by UUID",
+     *
      *    @OA\Parameter(
      *      name="UUID",
      *      in="path",
      *      description="UUID of OpenConvenanten item",
      *       example="/36aea3a9-e1d8-407a-8ea3-4617856f97fc",
      *      required=true,
+     *
      *      @OA\Schema(
      *        type="string",
      *        format="uuid"
      *      )
      *    ),
+     *
      *    @OA\Response(
      *      response="200",
      *      description="OK",
+     *
      *      @OA\JsonContent(
      *        type="object",
      *        ref="#/components/schemas/OpenConvenanten",
+     *
      *        @OA\Link(link="OpenConvenantenRepository", ref="#/components/links/OpenconvenantenRepository"),
+     *
      *        @OA\Examples(example=200, summary="", value={"name":1})
      *     ),
      *   ),
+     *
      *    @OA\Response(
      *      response="404",
      *      description="OpenConvenanten not found",
+     *
      *      @OA\JsonContent(
      *        type="object",
      *      ),

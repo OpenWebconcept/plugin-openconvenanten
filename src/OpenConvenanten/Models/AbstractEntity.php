@@ -21,9 +21,14 @@ abstract class AbstractEntity
         return new static($data);
     }
 
-    public function getMetaKeyWithPrefix(string $key)
+    public function getMetaKeyWithPrefix(string $key = ''): string
     {
         return sprintf('%s%s', self::PREFIX, $key);
+    }
+
+    public function getFromData(string $key = '', $default = null)
+    {
+        return $this->data[$this->getMetaKeyWithPrefix($key)] ?? $default;
     }
 
     abstract protected function data();

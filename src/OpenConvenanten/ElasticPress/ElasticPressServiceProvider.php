@@ -15,9 +15,9 @@ class ElasticPressServiceProvider extends ServiceProvider
      */
     public function register()
     {
-		if (\is_plugin_active('yard-elasticsearch/yard-elasticsearch.php')) {
-			return;
-		}
+        if (\is_plugin_active('yard-elasticsearch/yard-elasticsearch.php')) {
+            return;
+        }
 
         if (! class_exists('\ElasticPress\Elasticsearch')) {
             return;
@@ -28,7 +28,7 @@ class ElasticPressServiceProvider extends ServiceProvider
         add_filter('ep_dashboard_indexable_labels', function ($labels) {
             $labels['openwoo'] = [
                 'singular' => esc_html__('openconvenant-item', 'elasticpress'),
-                'plural'   => esc_html__('openconvenanten', 'elasticpress'),
+                'plural' => esc_html__('openconvenanten', 'elasticpress'),
             ];
 
             return $labels;

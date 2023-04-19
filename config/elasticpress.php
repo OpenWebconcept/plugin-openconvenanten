@@ -7,10 +7,10 @@ return [
     'postStatus' => [
         'publish'
     ],
-    'language'   => 'dutch',
-    'expire'     => [
+    'language' => 'dutch',
+    'expire' => [
         'offset' => '14d',
-        'decay'  => 0.5,
+        'decay' => 0.5,
     ],
     'search' => [
         'weight' => 2

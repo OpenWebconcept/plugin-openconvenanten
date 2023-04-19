@@ -11,10 +11,12 @@ use Yard\OpenConvenanten\Foundation\ServiceProvider;
  *    url="https://{site}/wp-json/yard/openconvenanten/v1",
  *    description=""
  *  ),
+ *
  *  @OA\Info(
  *    title="OpenWebConcept OpenConvenanten API",
  *    version="1.0.13",
  *    termsOfService="https://www.openwebconcept.nl/",
+ *
  *    @OA\Contact(
  *      name="OpenWebConcept",
  *      url="https://www.openwebconcept.nl/",
@@ -32,6 +34,7 @@ use Yard\OpenConvenanten\Foundation\ServiceProvider;
  *         "url": "https://openwebconcept.bitbucket.io/openconvenanten/"
  *       }
  *    },
+ *
  *    @OA\License(
  *      name="OpenWebConcept",
  *      url="https://www.openwebconcept.nl/"
@@ -57,20 +60,20 @@ class RestAPIServiceProvider extends ServiceProvider
     public function registerRoutes(): void
     {
         \register_rest_route($this->namespace, 'items', [
-            'methods'             => \WP_REST_Server::READABLE,
-            'callback'            => [new ItemController($this->plugin), 'getItems'],
+            'methods' => \WP_REST_Server::READABLE,
+            'callback' => [new ItemController($this->plugin), 'getItems'],
             'permission_callback' => '__return_true',
         ]);
 
         \register_rest_route($this->namespace, 'items/latest', [
-            'methods'             => \WP_REST_Server::READABLE,
-            'callback'            => [new ItemController($this->plugin), 'getLatestItems'],
+            'methods' => \WP_REST_Server::READABLE,
+            'callback' => [new ItemController($this->plugin), 'getLatestItems'],
             'permission_callback' => '__return_true',
         ]);
 
         \register_rest_route($this->namespace, 'items/(?P<slug>[a-zA-Z0-9-]+)', [
-            'methods'             => \WP_REST_Server::READABLE,
-            'callback'            => [new ItemController($this->plugin), 'getItem'],
+            'methods' => \WP_REST_Server::READABLE,
+            'callback' => [new ItemController($this->plugin), 'getItem'],
             'permission_callback' => '__return_true',
         ]);
     }
@@ -89,7 +92,7 @@ class RestAPIServiceProvider extends ServiceProvider
 
         $whitelist[$this->namespace] = [
             'endpoint_stub' => '/' . $this->namespace,
-            'methods'       => ['GET'],
+            'methods' => ['GET'],
         ];
 
         return $whitelist;

@@ -44,16 +44,16 @@ class MetaboxServiceProviderTest extends TestCase
 
         $configMetaboxes = [
             'base' => [
-                'id'     => 'metadata',
+                'id' => 'metadata',
                 'fields' => [
                     'general' => [
                         'testfield_noid' => [
                             'type' => 'heading'
                         ],
-                        'testfield1'     => [
+                        'testfield1' => [
                             'id' => 'metabox_id1'
                         ],
-                        'testfield2'     => [
+                        'testfield2' => [
                             'id' => 'metabox_id2'
                         ]
                     ]
@@ -65,7 +65,7 @@ class MetaboxServiceProviderTest extends TestCase
 
         $expectedMetaboxes = [
             0 => [
-                'id'     => 'metadata',
+                'id' => 'metadata',
                 'fields' => [
                     [
                         'type' => 'heading'
@@ -89,7 +89,7 @@ class MetaboxServiceProviderTest extends TestCase
 
         $existingMetaboxes = [
             0 => [
-                'id'     => 'existing_metadata',
+                'id' => 'existing_metadata',
                 'fields' => [
                     [
                         'type' => 'existing_heading'
@@ -107,7 +107,7 @@ class MetaboxServiceProviderTest extends TestCase
         $expectedMetaboxesAfterMerge = [
 
             0 => [
-                'id'     => 'existing_metadata',
+                'id' => 'existing_metadata',
                 'fields' => [
                     [
                         'type' => 'existing_heading'
@@ -121,7 +121,7 @@ class MetaboxServiceProviderTest extends TestCase
                 ]
             ],
             1 => [
-                'id'     => 'metadata',
+                'id' => 'metadata',
                 'fields' => [
                     [
                         'type' => 'heading'

@@ -42,15 +42,15 @@ class OpenConvenanten
     public function transform(): array
     {
         $data = [
-            'ID'                          => $this->meta('Zaaknummer'),
-            'Samenvatting'                => $this->meta('Samenvatting', ''),
-            'Onderwerp'                   => $this->meta('Onderwerp', ''),
-            'Beleidsterrein'              => $this->meta('Beleidsterrein', ''),
-            'Partijen'                    => PartijenEntity::make($this->asNumeric($this->meta('Partijen_bij_convenant', [])))->get(),
-            'Duur'                        => $this->meta('Duur_van_het_convenant', ''),
-            'Datum_ondertekening'         => $this->meta('Datum_ondertekening', ''),
-            'slug'                        => str_replace('openconvenanten-', '', $this->field('post_name', '')),
-            'identifier'                  => $this->field('ID', ''),
+            'ID' => $this->meta('Zaaknummer_ID'),
+            'Samenvatting' => $this->meta('Samenvatting', ''),
+            'Onderwerp' => $this->meta('Onderwerp', ''),
+            'Beleidsterrein' => $this->meta('Beleidsterrein', ''),
+            'Partijen' => PartijenEntity::make($this->asNumeric($this->meta('Partijen_bij_convenant', [])))->get(),
+            'Duur' => $this->meta('Duur_van_het_convenant', ''),
+            'Datum_ondertekening' => $this->meta('Datum_ondertekening', ''),
+            'slug' => str_replace('openconvenanten-', '', $this->field('post_name', '')),
+            'identifier' => $this->field('ID', ''),
         ];
 
         foreach ($this->asNumeric($this->meta('Bijlagen_bestanden', [])) as $bijlage) {
@@ -77,8 +77,8 @@ class OpenConvenanten
     public function meta(string $key, $default = null)
     {
         $separator = '.';
-        $key       = sprintf('%s_%s', 'convenant', $key);
-        $data      = $this->data['meta'];
+        $key = sprintf('%s_%s', 'convenant', $key);
+        $data = $this->data['meta'];
         // @assert $key is a non-empty string
         // @assert $data is a loopable array
         // @otherwise return $default value

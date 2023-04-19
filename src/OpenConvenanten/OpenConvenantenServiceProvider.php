@@ -21,17 +21,17 @@ class OpenConvenantenServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->plugin->loader->addAction('wp_insert_post_data', $this, 'fillTitle', 10, 1);
+        $this->plugin->loader->addFilter('wp_insert_post_data', $this, 'fillTitle', 10, 1);
         $this->plugin->loader->addAction('wp_after_insert_post', $this, 'updateSavedPost', 10, 3);
         $this->plugin->loader->addAction('init', $this, 'registerPostTypes');
         $this->plugin->loader->addAction('init', $this, 'registerTaxonomies');
         $this->plugin->loader->addAction('pre_get_posts', $this, 'orderByPublishedDate');
-        $this->plugin->loader->addAction('transition_post_status', $this, 'updatePostName', 10, 3);
         (new RestAPIServiceProvider($this->plugin))->register();
     }
 
     /**
      * Fill the post_title for the overview.
+     * Based on post_title update post_name.
      */
     public function fillTitle(array $post = []): array
     {
@@ -40,6 +40,7 @@ class OpenConvenantenServiceProvider extends ServiceProvider
         }
 
         $post['post_title'] = isset($_POST['convenant_Onderwerp']) ? \esc_attr($_POST['convenant_Onderwerp']) : $post['post_title'];
+        $post['post_name'] = sprintf('openconvenanten-%s', \sanitize_title($post['post_title']));
 
         return $post;
     }
@@ -54,7 +55,7 @@ class OpenConvenantenServiceProvider extends ServiceProvider
         }
 
         $information = \get_post_meta($post, 'convenanten_Convenantverzoek_informatie', true);
-        $timestamp   = $information['convenant_Tijdstip_laatste_wijziging']['timestamp'] ?? null;
+        $timestamp = $information['convenant_Tijdstip_laatste_wijziging']['timestamp'] ?? null;
 
         \update_post_meta($post, 'updated_at', $timestamp);
         if (! \metadata_exists('post', $post, 'convenant_UUID')) {
@@ -63,8 +64,8 @@ class OpenConvenantenServiceProvider extends ServiceProvider
                 mt_rand(0, 0xffff),
                 mt_rand(0, 0xffff),
                 mt_rand(0, 0xffff),
-                mt_rand(0, 0x0fff) | 0x4000,
-                mt_rand(0, 0x3fff) | 0x8000,
+                mt_rand(0, 0x0fff)|0x4000,
+                mt_rand(0, 0x3fff)|0x8000,
                 mt_rand(0, 0xffff),
                 mt_rand(0, 0xffff),
                 mt_rand(0, 0xffff)
@@ -103,18 +104,18 @@ class OpenConvenantenServiceProvider extends ServiceProvider
     public function registerPostTypes(): void
     {
         \register_post_type(self::POSTTYPE, [
-            'label'              => 'Convenanten',
-            'public'             => true,
+            'label' => 'Convenanten',
+            'public' => true,
             'publicly_queryable' => false,
-            'show_ui'            => true,
-            'show_in_menu'       => true,
-            'show_in_rest'       => true,
-            'query_var'          => false,
-            'capability_type'    => 'post',
-            'has_archive'        => false,
-            'hierarchical'       => false,
-            'menu_position'      => null,
-            'supports'           => ['author', 'excerpt'],
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'show_in_rest' => true,
+            'query_var' => false,
+            'capability_type' => 'post',
+            'has_archive' => false,
+            'hierarchical' => false,
+            'menu_position' => null,
+            'supports' => ['author', 'excerpt'],
         ]);
     }
 
@@ -128,26 +129,6 @@ class OpenConvenantenServiceProvider extends ServiceProvider
 
         foreach ($taxonomies as $taxonomyName => $taxonomy) {
             \register_taxonomy($taxonomyName, $taxonomy['object_types'], $taxonomy['args']);
-        }
-    }
-
-    public function updatePostName($new_status, $old_status, $post): void
-    {
-        if (self::POSTTYPE !== $post->post_type) {
-            return;
-        }
-
-        if ('publish' !== $new_status) {
-            return;
-        }
-
-        $postName = 'openconvenanten-' . \sanitize_title($post->post_title);
-
-        if ($postName !== $post->post_name) {
-            \wp_update_post([
-                'ID'        => $post->ID,
-                'post_name' => $postName,
-            ]);
         }
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\GravityForms\Fields;
 
@@ -9,7 +9,7 @@ abstract class Field
 
     public function __construct(string $key, $value)
     {
-        $this->key   = $key;
+        $this->key = $key;
         $this->value = $value;
     }
 

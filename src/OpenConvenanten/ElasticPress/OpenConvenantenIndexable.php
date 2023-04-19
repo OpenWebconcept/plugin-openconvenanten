@@ -15,11 +15,8 @@ class OpenConvenantenIndexable extends Post
      */
     public $slug = 'openconvenant-item';
 
-    /** @var Config */
-    protected $config;
-
-    /** @var OpenConvenantenRepository */
-    protected $repository;
+    protected Config $config;
+    protected OpenConvenantenRepository $repository;
 
     /**
      * Create indexable and initialize dependencies
@@ -28,7 +25,7 @@ class OpenConvenantenIndexable extends Post
     {
         $this->config = $config;
         $this->labels = [
-            'plural'   => esc_html__('OpenConvenanten', OCV_LANGUAGE_DOMAIN),
+            'plural' => esc_html__('OpenConvenanten', OCV_LANGUAGE_DOMAIN),
             'singular' => esc_html__('OpenConvenant item', OCV_LANGUAGE_DOMAIN),
         ];
         $this->repository = $repository;
@@ -78,7 +75,7 @@ class OpenConvenantenIndexable extends Post
 
     protected function getEnvironmentVariable(): string
     {
-        return getenv('APP_ENV');
+        return $_ENV['APP_ENV'] ?? '';
     }
 
     /**
@@ -105,19 +102,19 @@ class OpenConvenantenIndexable extends Post
         remove_action('updated_postmeta', [ $this->sync_manager, 'action_queue_meta_sync' ], 10);
 
         $post_args = [
-            'ID'                    => $post_id,
-            'post_date'             => $post_date,
-            'post_date_gmt'         => $post_date_gmt,
-            'title'                 => $post->post_title,
-            'excerpt'               => $post->post_excerpt,
-            'content'               => $this->prepare_meta_types($this->prepare_meta($post)), // post_meta removed in 2.4
-            'post_name'             => $post->post_name,
-            'post_modified'         => $post_modified,
-            'post_modified_gmt'     => $post_modified_gmt,
-            'post_type'             => $post->post_type,
-            'post_mime_type'        => $post->post_mime_type,
-            'permalink'             => \get_permalink($post_id),
-            'meta'                  => $this->prepare_meta_types($this->prepare_meta($post)), // post_meta removed in 2.4
+            'ID' => $post_id,
+            'post_date' => $post_date,
+            'post_date_gmt' => $post_date_gmt,
+            'title' => $post->post_title,
+            'excerpt' => $post->post_excerpt,
+            'content' => $this->prepare_meta_types($this->prepare_meta($post)), // post_meta removed in 2.4
+            'post_name' => $post->post_name,
+            'post_modified' => $post_modified,
+            'post_modified_gmt' => $post_modified_gmt,
+            'post_type' => $post->post_type,
+            'post_mime_type' => $post->post_mime_type,
+            'permalink' => \get_permalink($post_id),
+            'meta' => $this->prepare_meta_types($this->prepare_meta($post)), // post_meta removed in 2.4
         ];
 
         // Turn back on updated_postmeta hook
@@ -137,19 +134,19 @@ class OpenConvenantenIndexable extends Post
     {
         $items = $this->repository
             ->query(apply_filters('yard/openconvenanten/rest-api/items/query', [
-                'post_type'           => ['openconvenant-item'],
-                'posts_per_page'      => $this->get_bulk_items_per_page(),
-                'post_status'         => $this->get_indexable_post_status(),
+                'post_type' => ['openconvenant-item'],
+                'posts_per_page' => $this->get_bulk_items_per_page(),
+                'post_status' => $this->get_indexable_post_status(),
                 'ignore_sticky_posts' => true,
-                'orderby'             => 'ID',
-                'order'               => 'desc',
+                'orderby' => 'ID',
+                'order' => 'desc',
             ]));
 
         $args = array_merge($args, $items->getQueryArgs());
         $query = new WP_Query($args);
 
         return [
-            'objects'       => $query->posts ?? [],
+            'objects' => $query->posts ?? [],
             'total_objects' => $query->found_posts,
         ];
     }

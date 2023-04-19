@@ -17,7 +17,7 @@ return [
          *
          * @return {int} New number
          */
-        'index.number_of_shards'           => apply_filters('ep_default_index_number_of_shards', 5),
+        'index.number_of_shards' => apply_filters('ep_default_index_number_of_shards', 5),
         /**
          * Filter number of Elasticsearch replicas to use in indices
          *
@@ -27,7 +27,7 @@ return [
          *
          * @return {int} New number
          */
-        'index.number_of_replicas'         => apply_filters('ep_default_index_number_of_replicas', 1),
+        'index.number_of_replicas' => apply_filters('ep_default_index_number_of_replicas', 1),
         /**
          * Filter Elasticsearch total field limit for posts
          *
@@ -47,7 +47,7 @@ return [
          *
          * @return {bool} New value
          */
-        'index.mapping.ignore_malformed'   => apply_filters('ep_ignore_malformed', true),
+        'index.mapping.ignore_malformed' => apply_filters('ep_ignore_malformed', true),
         /**
          * Filter Elasticsearch max result window for posts
          *
@@ -57,7 +57,7 @@ return [
          *
          * @return {int} New number
          */
-        'index.max_result_window'          => apply_filters('ep_max_result_window', 1000000),
+        'index.max_result_window' => apply_filters('ep_max_result_window', 1000000),
         /**
          * Filter Elasticsearch maximum shingle difference
          *
@@ -67,12 +67,12 @@ return [
          *
          * @return {int} New number
          */
-        'index.max_shingle_diff'           => apply_filters('ep_max_shingle_diff', 8),
-        'analysis'                         => [
-            'analyzer'   => [
-                'default'          => [
-                    'tokenizer'   => 'standard',
-                    'filter'      => [ 'ewp_word_delimiter', 'lowercase', 'stop', 'ewp_snowball' ],
+        'index.max_shingle_diff' => apply_filters('ep_max_shingle_diff', 8),
+        'analysis' => [
+            'analyzer' => [
+                'default' => [
+                    'tokenizer' => 'standard',
+                    'filter' => [ 'ewp_word_delimiter', 'lowercase', 'stop', 'ewp_snowball' ],
                     'char_filter' => [ 'html_strip' ],
                     /**
                      * Filter Elasticsearch default language in mapping
@@ -84,31 +84,31 @@ return [
                      *
                      * @return {string} New language
                      */
-                    'language'    => apply_filters('ep_analyzer_language', 'english', 'analyzer_default'),
+                    'language' => apply_filters('ep_analyzer_language', 'english', 'analyzer_default'),
                 ],
                 'shingle_analyzer' => [
-                    'type'      => 'custom',
+                    'type' => 'custom',
                     'tokenizer' => 'standard',
-                    'filter'    => [ 'lowercase', 'shingle_filter' ],
+                    'filter' => [ 'lowercase', 'shingle_filter' ],
                 ],
-                'ewp_lowercase'    => [
-                    'type'      => 'custom',
+                'ewp_lowercase' => [
+                    'type' => 'custom',
                     'tokenizer' => 'keyword',
-                    'filter'    => [ 'lowercase' ],
+                    'filter' => [ 'lowercase' ],
                 ],
             ],
-            'filter'     => [
-                'shingle_filter'     => [
-                    'type'             => 'shingle',
+            'filter' => [
+                'shingle_filter' => [
+                    'type' => 'shingle',
                     'min_shingle_size' => 2,
                     'max_shingle_size' => 5,
                 ],
                 'ewp_word_delimiter' => [
-                    'type'              => 'word_delimiter',
+                    'type' => 'word_delimiter',
                     'preserve_original' => true,
                 ],
-                'ewp_snowball'       => [
-                    'type'     => 'snowball',
+                'ewp_snowball' => [
+                    'type' => 'snowball',
                     /**
                      * Filter Elasticsearch default language in mapping
                      *
@@ -121,36 +121,36 @@ return [
                      */
                     'language' => apply_filters('ep_analyzer_language', 'english', 'filter_ewp_snowball'),
                 ],
-                'edge_ngram'         => [
-                    'side'     => 'front',
+                'edge_ngram' => [
+                    'side' => 'front',
                     'max_gram' => 10,
                     'min_gram' => 3,
-                    'type'     => 'edgeNGram',
+                    'type' => 'edgeNGram',
                 ],
             ],
             'normalizer' => [
                 'lowerasciinormalizer' => [
-                    'type'   => 'custom',
+                    'type' => 'custom',
                     'filter' => [ 'lowercase', 'asciifolding' ],
                 ],
             ],
         ],
     ],
     'mappings' => [
-        'date_detection'    => false,
+        'date_detection' => false,
         'dynamic_templates' => [
             [
                 'template_meta' => [
                     'path_match' => 'post_meta.*',
-                    'mapping'    => [
-                        'type'   => 'text',
-                        'path'   => 'full',
+                    'mapping' => [
+                        'type' => 'text',
+                        'path' => 'full',
                         'fields' => [
                             '{name}' => [
                                 'type' => 'text',
                             ],
-                            'raw'    => [
-                                'type'         => 'keyword',
+                            'raw' => [
+                                'type' => 'keyword',
                                 'ignore_above' => 10922,
                             ],
                         ],
@@ -160,35 +160,35 @@ return [
             [
                 'template_terms' => [
                     'path_match' => 'terms.*',
-                    'mapping'    => [
-                        'type'       => 'object',
-                        'path'       => 'full',
+                    'mapping' => [
+                        'type' => 'object',
+                        'path' => 'full',
                         'properties' => [
-                            'name'             => [
-                                'type'   => 'text',
+                            'name' => [
+                                'type' => 'text',
                                 'fields' => [
-                                    'raw'      => [
+                                    'raw' => [
                                         'type' => 'keyword',
                                     ],
                                     'sortable' => [
-                                        'type'       => 'keyword',
+                                        'type' => 'keyword',
                                         'normalizer' => 'lowerasciinormalizer',
                                     ],
                                 ],
                             ],
-                            'term_id'          => [
+                            'term_id' => [
                                 'type' => 'long',
                             ],
                             'term_taxonomy_id' => [
                                 'type' => 'long',
                             ],
-                            'parent'           => [
+                            'parent' => [
                                 'type' => 'long',
                             ],
-                            'slug'             => [
+                            'slug' => [
                                 'type' => 'keyword',
                             ],
-                            'term_order'       => [
+                            'term_order' => [
                                 'type' => 'long',
                             ],
                         ],
@@ -198,43 +198,43 @@ return [
             [
                 'term_suggest' => [
                     'path_match' => 'term_suggest_*',
-                    'mapping'    => [
-                        'type'     => 'completion',
+                    'mapping' => [
+                        'type' => 'completion',
                         'analyzer' => 'default',
                     ],
                 ],
             ],
         ],
-        'properties'        => [
+        'properties' => [
             'UUID' => [
                 'type' => 'long',
             ],
-            'ID'                    => [
+            'ID' => [
                 'type' => 'keyword',
             ],
-            'post_date'             => [
-                'type'   => 'date',
+            'post_date' => [
+                'type' => 'date',
                 'format' => 'yyyy-MM-dd HH:mm:ss',
             ],
-            'post_date_gmt'         => [
-                'type'   => 'date',
+            'post_date_gmt' => [
+                'type' => 'date',
                 'format' => 'yyyy-MM-dd HH:mm:ss',
             ],
-            'title'            => [
-                'type'   => 'text',
+            'title' => [
+                'type' => 'text',
                 'fields' => [
                     'title' => [
-                        'type'     => 'text',
+                        'type' => 'text',
                         'analyzer' => 'standard',
                     ],
-                    'raw'        => [
-                        'type'         => 'keyword',
+                    'raw' => [
+                        'type' => 'keyword',
                         'ignore_above' => 10922,
                     ],
-                    'sortable'   => [
-                        'type'         => 'keyword',
+                    'sortable' => [
+                        'type' => 'keyword',
                         'ignore_above' => 10922,
-                        'normalizer'   => 'lowerasciinormalizer',
+                        'normalizer' => 'lowerasciinormalizer',
                     ],
                 ],
             ],
@@ -244,41 +244,41 @@ return [
             'content' => [
                 'type' => 'object'
             ],
-            'post_name'             => [
-                'type'   => 'text',
+            'post_name' => [
+                'type' => 'text',
                 'fields' => [
                     'post_name' => [
                         'type' => 'text',
                     ],
-                    'raw'       => [
-                        'type'         => 'keyword',
+                    'raw' => [
+                        'type' => 'keyword',
                         'ignore_above' => 10922,
                     ],
                 ],
             ],
-            'post_modified'         => [
-                'type'   => 'date',
+            'post_modified' => [
+                'type' => 'date',
                 'format' => 'yyyy-MM-dd HH:mm:ss',
             ],
-            'post_modified_gmt'     => [
-                'type'   => 'date',
+            'post_modified_gmt' => [
+                'type' => 'date',
                 'format' => 'yyyy-MM-dd HH:mm:ss',
             ],
-            'post_type'             => [
-                'type'   => 'text',
+            'post_type' => [
+                'type' => 'text',
                 'fields' => [
                     'post_type' => [
                         'type' => 'text',
                     ],
-                    'raw'       => [
+                    'raw' => [
                         'type' => 'keyword',
                     ],
                 ],
             ],
-            'post_mime_type'        => [
+            'post_mime_type' => [
                 'type' => 'keyword',
             ],
-            'permalink'             => [
+            'permalink' => [
                 'type' => 'keyword',
             ]
         ],

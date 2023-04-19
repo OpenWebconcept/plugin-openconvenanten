@@ -16,29 +16,23 @@ return [
          * - Required: name
          */
         [
-            'type'    => 'plugin',
-            'label'   => 'RWMB Metabox',
-            'version' => '5.0',
-            'file'    => 'meta-box/meta-box.php',
+            'type' => 'plugin',
+            'label' => 'CMB2',
+            'version' => '2.10.1',
+            'file' => 'cmb2/init.php',
         ],
         [
-            'type'    => 'plugin',
-            'label'   => 'Meta Box Group',
-            'version' => '1.2.14',
-            'file'    => 'metabox-group/meta-box-group.php',
-        ],
-        [
-            'type'  => 'class',
+            'type' => 'class',
             'label' => '<a href="https://github.com/johnbillion/extended-cpts" target="_blank">Extended CPT library</a>',
-            'name'  => 'Extended_CPT',
+            'name' => 'Extended_CPT',
         ]
     ],
     'suggested' => [
         [
-            'type'    => 'plugin',
-            'label'   => 'ElasticPress',
+            'type' => 'plugin',
+            'label' => 'ElasticPress',
             'version' => '3.6.0',
-            'file'    => 'elasticpress/elasticpress.php',
+            'file' => 'elasticpress/elasticpress.php',
         ]
     ]
 ];
