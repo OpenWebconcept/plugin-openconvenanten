@@ -95,7 +95,7 @@ msgid "Inactief"
 msgstr ""
 
 #: src/OpenConvenanten/Foundation/DependencyChecker.php:143
-msgid "Minimale versie:"
+msgid "Minimale versie::"
 msgstr ""
 
 #: src/OpenConvenanten/ElasticPress/OpenConvenantenIndexable.php:31
@@ -104,4 +104,89 @@ msgstr ""
 
 #: src/OpenConvenanten/ElasticPress/OpenConvenantenIndexable.php:31
 msgid "OpenConvenant item"
+msgstr ""
+
+#: config/taxonomies.php:12
+msgid "Typen"
+msgstr ""
+
+#: config/taxonomies.php:13
+msgid "Type"
+msgstr ""
+
+#: config/taxonomies.php:14
+msgid "Zoek typen"
+msgstr ""
+
+#: config/taxonomies.php:15
+msgid "Alle typen"
+msgstr ""
+
+#: config/taxonomies.php:16
+msgid "Wijzig type"
+msgstr ""
+
+#: config/taxonomies.php:17
+msgid "Bekijk type"
+msgstr ""
+
+#: config/taxonomies.php:18
+msgid "Werk type bij"
+msgstr ""
+
+#: config/taxonomies.php:19
+msgid "Voeg type toe"
+msgstr ""
+
+#: config/taxonomies.php:20
+msgid "Nieuwe type naam"
+msgstr ""
+
+#: config/taxonomies.php:21
+msgid "Geen typen gevonden"
+msgstr ""
+
+#: config/taxonomies.php:33
+#: config/taxonomies.php:34
+msgid "Tonen op"
+msgstr ""
+
+#: config/taxonomies.php:35
+msgid "Zoek tonen op"
+msgstr ""
+
+#: config/taxonomies.php:36
+msgid "Alle tonen op"
+msgstr ""
+
+#: config/taxonomies.php:37
+msgid "Wijzig tonen op"
+msgstr ""
+
+#: config/taxonomies.php:38
+msgid "Bekijk tonen op"
+msgstr ""
+
+#: config/taxonomies.php:39
+msgid "Werk tonen op bij"
+msgstr ""
+
+#: config/taxonomies.php:40
+msgid "Voeg tonen op toe"
+msgstr ""
+
+#: config/taxonomies.php:41
+msgid "Nieuwe tonen op"
+msgstr ""
+
+#: config/taxonomies.php:42
+msgid "Geen tonen op gevonden"
+msgstr ""
+
+#: src/OpenWOO/Taxonomy/TaxonomyController.php:17
+msgid "Aanvullende uitleg"
+msgstr ""
+
+#: src/OpenWOO/Taxonomy/TaxonomyController.php:18
+msgid "De waarde van de slug moet het ID zijn van de blog die je wilt toevoegen als term. Het ID wordt gebruikt om de juiste openconvenant-items weer te geven op alle blogs."
 msgstr ""

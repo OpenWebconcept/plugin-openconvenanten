@@ -121,6 +121,10 @@ class ItemController
             ->query(apply_filters('yard/openconvenanten/rest-api/items/query', $this->getPaginatorParams($request)))
             ->query(apply_filters('yard/openconvenanten/rest-api/items/query', $this->getFilters($request)));
 
+        if ($this->showOnParamIsValid($request)) {
+            $items->query(OpenConvenantenRepository::addShowOnParameter($request->get_param('source')));
+        }
+
         $data = $items->all();
 
         return new Response([
@@ -225,5 +229,22 @@ class ItemController
                 $data,
             ],
         ], $item->getQuery());
+    }
+
+    /**
+     * Validate if show on param is valid.
+     * Param should be a numeric value.
+     */
+    protected function showOnParamIsValid(WP_REST_Request $request): bool
+    {
+        if (empty($request->get_param('source'))) {
+            return false;
+        }
+
+        if (! is_numeric($request->get_param('source'))) {
+            return false;
+        }
+
+        return true;
     }
 }

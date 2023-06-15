@@ -1,9 +1,5 @@
 <?php declare(strict_types=1);
 
-/**
- * BasePlugin which sets all the serviceproviders.
- */
-
 namespace Yard\OpenConvenanten\Foundation;
 
 /**
@@ -14,13 +10,13 @@ class Plugin
     /**
      * Name of the plugin.
      */
-    public const NAME = OCV_SLUG;
+    public const NAME = \OCV_SLUG;
 
     /**
      * Version of the plugin.
      * Used for setting versions of enqueue scripts and styles.
      */
-    public const VERSION = OCV_VERSION;
+    public const VERSION = \OCV_VERSION;
 
     /**
      * Path to the root of the plugin.
