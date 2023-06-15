@@ -10,8 +10,6 @@ use Yard\OpenConvenanten\Models\OpenConvenanten as OpenConvenantenModel;
 class OpenConvenantenRepository extends Base
 {
     protected string $posttype = 'openconvenant-item';
-
-    /** @inheritdoc */
     protected string $model = OpenConvenantenModel::class;
 
     /**
@@ -22,5 +20,22 @@ class OpenConvenantenRepository extends Base
         $this->queryArgs = array_merge($this->queryArgs, $args);
 
         return $this;
+    }
+
+    /**
+     * Add parameters to tax_query used for filtering items on selected blog (ID) slugs.
+     */
+    public static function addShowOnParameter(string $blogSlug): array
+    {
+        return [
+            'tax_query' => [
+                [
+                    'taxonomy' => 'openconvenanten-show-on',
+                    'terms'    => sanitize_text_field($blogSlug),
+                    'field'    => 'slug',
+                    'operator' => 'IN'
+                ]
+            ]
+        ];
     }
 }
