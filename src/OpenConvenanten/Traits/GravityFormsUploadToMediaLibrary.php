@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\Traits;
 
@@ -20,7 +22,7 @@ trait GravityFormsUploadToMediaLibrary
             return 0;
         }
 
-        $uploadFullPath = $uploadDirectory['path'] . $uploadFilename;
+        $uploadFullPath = sprintf('%s/%s', $uploadDirectory['path'], $uploadFilename);
         $externalFile = $this->getFileFromGravityForms($url);
 
         if (empty($externalFile)) {
@@ -28,7 +30,7 @@ trait GravityFormsUploadToMediaLibrary
         }
 
         $attachmentID = $this->insertAttachment($uploadFullPath, $externalFile, $uploadFilename);
-        
+
         if (! $attachmentID) {
             return 0;
         }
@@ -51,7 +53,7 @@ trait GravityFormsUploadToMediaLibrary
     {
         $metaParsedURL = parse_url($url);
         $siteParsedURL = parse_url(get_site_url());
-        
+
         return $metaParsedURL['host'] !== $siteParsedURL['host'];
     }
 
@@ -103,7 +105,7 @@ trait GravityFormsUploadToMediaLibrary
             'post_status' => 'inherit',
         ];
 
-        $attachmentID = \wp_insert_attachment($insertArgs, $uploadFullPath);
+        $attachmentID = \wp_insert_attachment($insertArgs, $uploadFullPath, 0, true);
 
         return \is_wp_error($attachmentID) ? 0 : $attachmentID;
     }
