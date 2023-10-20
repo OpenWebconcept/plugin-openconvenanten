@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 1.2
+
+### Feat
+
+- Set show on taxonomy term after form submission
+
 ## Version 1.1.1
 
 ### Fix

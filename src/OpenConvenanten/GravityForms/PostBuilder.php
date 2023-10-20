@@ -1,6 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\GravityForms;
+
+use WP_Term;
 
 class PostBuilder
 {
@@ -23,7 +27,7 @@ class PostBuilder
         if (0 === $postId) {
             return 0;
         }
-        
+
         $this->saveMeta($postId, $this->getMetaValues());
 
         return $postId;
@@ -62,7 +66,41 @@ class PostBuilder
     protected function saveMeta(int $postId, array $metaValues): void
     {
         foreach ($metaValues as $key => $value) {
+            if ($key === 'convenant_Website') {
+                $this->handleShowOnTax($postId, $value);
+
+                continue;
+            }
+
             \update_post_meta($postId, $key, $value);
         }
+    }
+
+    private function handleShowOnTax(int $postId, string $value = ''): void
+    {
+        if (empty($value)) {
+            return;
+        }
+
+        $terms = \get_terms([
+            'taxonomy' => 'openconvenanten-show-on',
+            'hide_empty' => false,
+        ]);
+
+        if (! is_array($terms)) {
+            return;
+        }
+
+        $filtered = array_filter($terms, function ($term) use ($value) {
+            return $term->slug === $value;
+        });
+
+        $termToSet = reset($filtered);
+
+        if (! $termToSet instanceof WP_Term) {
+            return;
+        }
+
+        \wp_set_post_terms($postId, [$termToSet->term_id], 'openconvenanten-show-on', true);
     }
 }

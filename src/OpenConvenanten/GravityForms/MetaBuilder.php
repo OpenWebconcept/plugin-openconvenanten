@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\GravityForms;
 
@@ -26,6 +28,15 @@ class MetaBuilder
 
             $metaValues[$key] = $value;
         }
+
+        $metaValues = $this->getShowOnBlog($metaValues);
+
+        return $metaValues;
+    }
+
+    protected function getShowOnBlog(array $metaValues): array
+    {
+        $metaValues['convenant_Website'] = (string) $metaValues['convenant_Website'] ?? '';
 
         return $metaValues;
     }
