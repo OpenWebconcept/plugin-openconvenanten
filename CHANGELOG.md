@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 1.2.1
+
+### Chore
+
+- Updated CMB2 repository location
+
 ## Version 1.2
 
 ### Feat
