@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 1.2.2
+
+### Chore
+
+- Update dependencies
+
 ## Version 1.2.1
 
 ### Chore
@@ -15,14 +21,15 @@
 ## Version 1.1.1
 
 ### Fix
--	Composing $uploadFullPath inside GravityFormsUploadToMediaLibrary trait
+
+- Composing $uploadFullPath inside GravityFormsUploadToMediaLibrary trait
 
 ## Version 1.1.0
 
 ### Feat
 
--   Add show on taxonomy
+- Add show on taxonomy
 
 ## Version 1.0.0
 
--   Initial release
+- Initial release
