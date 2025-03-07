@@ -36,7 +36,6 @@ class Plugin
     public function __construct(string $rootPath)
     {
         $this->rootPath = $rootPath;
-        load_plugin_textdomain($this->getName(), false, $this->getName() . '/languages/');
 
         $this->loader = new Loader;
 
@@ -86,6 +85,7 @@ class Plugin
 
         // Register the Hook loader.
         $this->loader->addAction('init', $this, 'filterPlugin', 4);
+		$this->loader->addAction('after_setup_theme', $this, 'loadTextDomain', 4);
         $this->loader->register();
 
         return true;
@@ -98,6 +98,14 @@ class Plugin
     {
         \do_action('yard/' . self::NAME . '/plugin', $this);
     }
+
+	/**
+	 * Load the plugin textdomain.
+	 */
+	public function loadTextDomain(): void
+	{
+		\load_plugin_textdomain($this->getName(), false, $this->getName() . '/languages/');
+	}
 
     /**
      * Call method on service providers.
