@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 1.2.3
+
+### Fix
+
+- Translations just in time error
+
 ## Version 1.2.2
 
 ### Chore
