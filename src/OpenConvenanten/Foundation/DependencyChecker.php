@@ -67,7 +67,7 @@ class DependencyChecker
         \add_action('admin_notices', function () {
             $list = '<p>' . __(
                 'De volgende plugins zijn vereist om gebruik te maken van de OpenConvenanten plugin:',
-                OCV_LANGUAGE_DOMAIN
+                'openconvenanten'
             ) . '</p><ol>';
 
             foreach ($this->failed as $dependency) {
@@ -91,10 +91,10 @@ class DependencyChecker
             if (! $this->dismissableAdminNotice->isAdminNoticeActive('dependency-suggestions-forever')) {
                 return;
             }
-            
+
             $list = '<p>' . __(
                 'De volgende plugins of bibliotheken worden aangeraden en ondersteund om gebruik te maken van de OpenConvenanten plugin:',
-                OCV_LANGUAGE_DOMAIN
+                'openconvenanten'
             ) . '</p><ol>';
 
             foreach ($this->suggestions as $suggestion) {
@@ -124,7 +124,7 @@ class DependencyChecker
     private function checkClass(array $dependency): void
     {
         if (! class_exists($dependency['name'])) {
-            $this->markFailed($dependency, __('Klasse bestaat niet', OCV_LANGUAGE_DOMAIN));
+            $this->markFailed($dependency, __('Klasse bestaat niet', 'openconvenanten'));
 
             return;
         }
@@ -140,7 +140,7 @@ class DependencyChecker
         }
 
         if (! $this->checkPluginActive($dependency)) {
-            $this->markFailed($dependency, __('Inactief', OCV_LANGUAGE_DOMAIN));
+            $this->markFailed($dependency, __('Inactief', 'openconvenanten'));
 
             return;
         }
@@ -148,7 +148,7 @@ class DependencyChecker
         // If there is a version lock set on the dependency...
         if (isset($dependency['version'])) {
             if (! $this->checkVersion($dependency)) {
-                $this->markFailed($dependency, __('Minimale versie:', OCV_LANGUAGE_DOMAIN) . ' <b>' . $dependency['version'] . '</b>');
+                $this->markFailed($dependency, __('Minimale versie:', 'openconvenanten') . ' <b>' . $dependency['version'] . '</b>');
             }
         }
     }

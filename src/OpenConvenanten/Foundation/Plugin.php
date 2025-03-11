@@ -7,51 +7,31 @@ namespace Yard\OpenConvenanten\Foundation;
  */
 class Plugin
 {
-    /**
-     * Name of the plugin.
-     */
     public const NAME = \OCV_SLUG;
-
-    /**
-     * Version of the plugin.
-     * Used for setting versions of enqueue scripts and styles.
-     */
     public const VERSION = \OCV_VERSION;
 
-    /**
-     * Path to the root of the plugin.
-     */
     public string $rootPath;
-
-    /**
-     * Instance of the configuration repository.
-     */
     public Config $config;
-
-    /**
-     * Instance of the Hook loader.
-     */
     public Loader $loader;
 
     public function __construct(string $rootPath)
     {
         $this->rootPath = $rootPath;
-        load_plugin_textdomain($this->getName(), false, $this->getName() . '/languages/');
-
         $this->loader = new Loader;
-
         $this->config = new Config($this->rootPath . '/config');
         $this->config->setProtectedNodes(['core']);
-        $this->config->boot();
     }
 
     /**
      * Boot the plugin.
      *
-     * @hook plugins_loaded
+     * @hook after_setup_theme
      */
     public function boot(): bool
     {
+		$this->loadTextDomain();
+		$this->config->boot();
+
         $dependencyChecker = new DependencyChecker(
             new DismissableAdminNotice,
             $this->config->get('dependencies.required'),
@@ -69,20 +49,7 @@ class Plugin
             $dependencyChecker->notifySuggestions();
         }
 
-        // Set up service providers
-        $this->callServiceProviders('register');
-
-        if (\is_admin()) {
-            $this->callServiceProviders('register', 'admin');
-            $this->callServiceProviders('boot', 'admin');
-        }
-
-        if ('cli' === php_sapi_name()) {
-            $this->callServiceProviders('register', 'cli');
-            $this->callServiceProviders('boot', 'cli');
-        }
-
-        $this->callServiceProviders('boot');
+        $this->registerProviders();
 
         // Register the Hook loader.
         $this->loader->addAction('init', $this, 'filterPlugin', 4);
@@ -91,12 +58,34 @@ class Plugin
         return true;
     }
 
+	public function loadTextDomain(): void
+	{
+		load_plugin_textdomain($this->getName(), false, $this->getName() . '/languages/');
+	}
+
+	protected function registerProviders(): void
+	{
+		$this->callServiceProviders('register');
+
+		if (\is_admin()) {
+			$this->callServiceProviders('register', 'admin');
+			$this->callServiceProviders('boot', 'admin');
+		}
+
+		if ('cli' === php_sapi_name()) {
+			$this->callServiceProviders('register', 'cli');
+			$this->callServiceProviders('boot', 'cli');
+		}
+
+		$this->callServiceProviders('boot');
+	}
+
     /**
      * Allows for hooking into the plugin name.
      */
     public function filterPlugin(): void
     {
-        \do_action('yard/' . self::NAME . '/plugin', $this);
+        do_action('yard/' . self::NAME . '/plugin', $this);
     }
 
     /**

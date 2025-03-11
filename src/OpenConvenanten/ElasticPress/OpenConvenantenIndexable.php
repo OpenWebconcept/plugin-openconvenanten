@@ -25,8 +25,8 @@ class OpenConvenantenIndexable extends Post
     {
         $this->config = $config;
         $this->labels = [
-            'plural' => esc_html__('OpenConvenanten', OCV_LANGUAGE_DOMAIN),
-            'singular' => esc_html__('OpenConvenant item', OCV_LANGUAGE_DOMAIN),
+            'plural' => esc_html__('OpenConvenanten', 'openconvenanten'),
+            'singular' => esc_html__('OpenConvenant item', 'openconvenanten'),
         ];
         $this->repository = $repository;
         $this->sync_manager = new OpenConvenantenSyncManager($this->slug);

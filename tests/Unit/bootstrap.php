@@ -23,7 +23,6 @@ define('WP_PLUGIN_DIR', __DIR__);
 define('WP_DEBUG', false);
 define('OCV_FILE', __FILE__);
 define('OCV_SLUG', basename(__FILE__, '.php'));
-define('OCV_LANGUAGE_DOMAIN', OCV_SLUG);
 define('OCV_DIR', basename(__DIR__));
 define('OCV_ROOT_PATH', __DIR__);
 define('OCV_VERSION', '1.0.13');
@@ -34,7 +33,7 @@ define('OCV_VERSION', '1.0.13');
 \WP_Mock::setUsePatchwork(true);
 \WP_Mock::bootstrap();
 
-$GLOBALS[OCV_LANGUAGE_DOMAIN] = [
+$GLOBALS['openconvenanten'] = [
     'active_plugins' => [OCV_DIR . '/' . OCV_FILE],
 ];
 

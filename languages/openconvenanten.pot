@@ -1,109 +1,147 @@
-#: config/openwoo/metaboxes.php:8
+# Copyright (C) 2025 Yard | Digital Agency
+# This file is distributed under the GPL-3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: Yard | OpenConvenanten 1.2.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/openconvenanten\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-03-11T06:38:01+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: openconvenanten\n"
+
+#. Plugin Name of the plugin
+#: openconvenanten.php
+msgid "Yard | OpenConvenanten"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: openconvenanten.php
+msgid "https://www.yard.nl/"
+msgstr ""
+
+#. Description of the plugin
+#: openconvenanten.php
+msgid "Voegt de OpenConvenanten functionaliteit toe aan de website"
+msgstr ""
+
+#. Author of the plugin
+#: openconvenanten.php
+msgid "Yard | Digital Agency"
+msgstr ""
+
+#: config/metaboxes.php:8
 msgid "Data"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:16
+#: config/metaboxes.php:16
 msgid "Zaaknummer (ID) *"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:24
+#: config/metaboxes.php:24
 msgid "Onderwerp *"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:32
+#: config/metaboxes.php:32
 msgid "Samenvatting *"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:43
+#: config/metaboxes.php:43
 msgid "Partijen bij convenant"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:46
+#: config/metaboxes.php:46
 msgid "Partij"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:47
+#: config/metaboxes.php:47
 msgid "Voeg partij toe"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:48
+#: config/metaboxes.php:48
 msgid "Verwijder partij"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:52
+#: config/metaboxes.php:52
+#: config/metaboxes.php:111
 msgid "Naam *"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:62
+#: config/metaboxes.php:62
 msgid "Beleidsterrein *"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:66
+#: config/metaboxes.php:66
 msgid "Economie"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:67
+#: config/metaboxes.php:67
 msgid "Onderwijs"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:68
+#: config/metaboxes.php:68
 msgid "Wonen"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:69
+#: config/metaboxes.php:69
 msgid "Zorg"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:70
+#: config/metaboxes.php:70
 msgid "Veiligheid"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:71
+#: config/metaboxes.php:71
 msgid "Ruimte"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:72
+#: config/metaboxes.php:72
 msgid "Cultuur"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:73
+#: config/metaboxes.php:73
 msgid "Sport"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:74
+#: config/metaboxes.php:74
 msgid "Milieu"
 msgstr ""
 
-#: config/openwoo/metaboxes.php:75
+#: config/metaboxes.php:75
 msgid "Overig"
 msgstr ""
 
-#: src/OpenConvenanten/Foundation/DependencyChecker.php:69
-msgid "De volgende plugins zijn vereist om gebruik te maken van de OpenConvenanten plugin:"
+#: config/metaboxes.php:82
+msgid "Duur van het convenant *"
 msgstr ""
 
-#: src/OpenConvenanten/Foundation/DependencyChecker.php:96
-msgid "De volgende plugins of bibliotheken worden aangeraden en ondersteund om gebruik te maken van de OpenConvenanten plugin:"
+#: config/metaboxes.php:90
+msgid "Datum ondertekening *"
 msgstr ""
 
-#: src/OpenConvenanten/Foundation/DependencyChecker.php:127
-msgid "Klasse bestaat niet"
+#: config/metaboxes.php:101
+msgid "Bijlagen"
 msgstr ""
 
-#: src/OpenConvenanten/Foundation/DependencyChecker.php:143
-msgid "Inactief"
+#: config/metaboxes.php:104
+msgid "Bijlage"
 msgstr ""
 
-#: src/OpenConvenanten/Foundation/DependencyChecker.php:143
-msgid "Minimale versie::"
+#: config/metaboxes.php:105
+msgid "Voeg bijlage toe"
 msgstr ""
 
-#: src/OpenConvenanten/ElasticPress/OpenConvenantenIndexable.php:31
-msgid "OpenConvenanten"
+#: config/metaboxes.php:106
+msgid "Verwijder bijlage"
 msgstr ""
 
-#: src/OpenConvenanten/ElasticPress/OpenConvenantenIndexable.php:31
-msgid "OpenConvenant item"
+#: config/metaboxes.php:119
+msgid "Bestand *"
 msgstr ""
 
 #: config/taxonomies.php:12
@@ -183,10 +221,38 @@ msgstr ""
 msgid "Geen tonen op gevonden"
 msgstr ""
 
-#: src/OpenWOO/Taxonomy/TaxonomyController.php:17
+#: src/OpenConvenanten/ElasticPress/OpenConvenantenIndexable.php:28
+msgid "OpenConvenanten"
+msgstr ""
+
+#: src/OpenConvenanten/ElasticPress/OpenConvenantenIndexable.php:29
+msgid "OpenConvenant item"
+msgstr ""
+
+#: src/OpenConvenanten/Foundation/DependencyChecker.php:68
+msgid "De volgende plugins zijn vereist om gebruik te maken van de OpenConvenanten plugin:"
+msgstr ""
+
+#: src/OpenConvenanten/Foundation/DependencyChecker.php:95
+msgid "De volgende plugins of bibliotheken worden aangeraden en ondersteund om gebruik te maken van de OpenConvenanten plugin:"
+msgstr ""
+
+#: src/OpenConvenanten/Foundation/DependencyChecker.php:127
+msgid "Klasse bestaat niet"
+msgstr ""
+
+#: src/OpenConvenanten/Foundation/DependencyChecker.php:143
+msgid "Inactief"
+msgstr ""
+
+#: src/OpenConvenanten/Foundation/DependencyChecker.php:151
+msgid "Minimale versie:"
+msgstr ""
+
+#: src/OpenConvenanten/Taxonomy/TaxonomyController.php:17
 msgid "Aanvullende uitleg"
 msgstr ""
 
-#: src/OpenWOO/Taxonomy/TaxonomyController.php:18
+#: src/OpenConvenanten/Taxonomy/TaxonomyController.php:18
 msgid "De waarde van de slug moet het ID zijn van de blog die je wilt toevoegen als term. Het ID wordt gebruikt om de juiste openconvenant-items weer te geven op alle blogs."
 msgstr ""
