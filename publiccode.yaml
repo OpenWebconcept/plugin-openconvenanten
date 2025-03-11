@@ -1,0 +1,52 @@
+publiccodeYmlVersion: '0.2'
+
+name: "plugin-openconvenanten"
+applicationSuite: 'OpenWebconcept'
+url: 'https://github.com/OpenWebconcept/plugin-openconvenanten"'
+releaseDate: '2023-01-03'
+
+platforms:
+    - 'web'
+
+categories:
+    - 'application-development'
+
+developmentStatus: 'Production'
+
+softwareType: 'softwareAddon'
+
+description:
+    en:
+        genericName: 'Yard | OpenConvenanten'
+        shortDescription: 'Adds OpenConvenanten implementation'
+        longDescription: 'Adds OpenConvenanten implementation'
+    nl:
+        genericName: 'Yard | OpenConvenanten'
+        shortDescription: 'Voegt de OpenConvenanten functionaliteit toe aan de website.'
+        longDescription: 'Voegt de OpenConvenanten functionaliteit toe aan de website.'
+
+legal:
+    license: 'EUPL-1.2'
+    repoOwner: 'Yard | Digital Agency'
+
+dependsOn:
+    open:
+		- name: 'extended-cpts'
+		- versionMin: 4.5.2
+		- name: 'cmb2'
+		- versionMin: 2.10.1
+        - name: 'WordPress'
+        - versionMin: 6.0.0
+
+intendedAudience:
+    countries:
+        - nl
+    scope:
+        - government
+
+maintenance:
+    contractors:
+        - name: 'Yard | Digital Agency'
+          website: 'https://www.yard.nl'
+          email: 'owc@yard.nl'
+    type: 'contract'
