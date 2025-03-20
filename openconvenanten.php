@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Plugin Name:       Yard | OpenConvenanten
  * Plugin URI:        https://www.yard.nl/
  * Description:       Voegt de OpenConvenanten functionaliteit toe aan de website
- * Version:           1.2.3
+ * Version:           1.2.4
  * Author:            Yard | Digital Agency
  * Author URI:        https://www.yard.nl/
  * License:           GPL-3.0
@@ -29,7 +29,7 @@ define('OCV_FILE', __FILE__);
 define('OCV_SLUG', basename(__FILE__, '.php'));
 define('OCV_DIR', basename(__DIR__));
 define('OCV_ROOT_PATH', __DIR__);
-define('OCV_VERSION', '1.2.3');
+define('OCV_VERSION', '1.2.4');
 
 /**
  * Manual loaded file: the autoloader.

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 1.2.4
+
+### Fix
+
+- Extended cpt dependency check
+
 ## Version 1.2.3
 
 ### Fix
