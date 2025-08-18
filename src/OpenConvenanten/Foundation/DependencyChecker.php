@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace Yard\OpenConvenanten\Foundation;
 
@@ -31,10 +32,11 @@ class DependencyChecker
                     $this->checkPlugin($dependency);
 
                     break;
-				case 'function':
+                case 'function':
 
-					$this->checkFunction($dependency);
-					break;
+                    $this->checkFunction($dependency);
+
+                    break;
             }
         }
 
@@ -59,7 +61,7 @@ class DependencyChecker
             }
         }
 
-        return 0 < count($this->suggestions);
+        return 0 < count($this->failed);
     }
 
     /**
@@ -172,18 +174,18 @@ class DependencyChecker
         })));
     }
 
-	/**
-	 * Checks if required function exists.
-	 */
-	private function checkFunction(array $dependency): void
-	{
-		if (! function_exists($dependency['name'])) {
-			$this->markFailed($dependency, __('Function does not exist:', 'openconvenanten') . ' <b>' . $dependency['name'] . '</b>');
-		}
-	}
+    /**
+     * Checks if required function exists.
+     */
+    private function checkFunction(array $dependency): void
+    {
+        if (! function_exists($dependency['name'])) {
+            $this->markFailed($dependency, __('Function does not exist:', 'openconvenanten') . ' <b>' . $dependency['name'] . '</b>');
+        }
+    }
 
 
-	/**
+    /**
      * Checks the installed version of the plugin.
      */
     private function checkVersion(array $dependency): bool
