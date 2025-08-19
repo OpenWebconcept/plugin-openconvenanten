@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## Version 1.2.6
+
+### Chore
+
+- Update version
+
+## Version 1.2.5
+
+### Fix
+
+- Check suggestion to correct array
+
 ## Version 1.2.4
 
 ### Fix
