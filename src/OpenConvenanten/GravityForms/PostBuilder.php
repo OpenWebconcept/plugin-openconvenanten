@@ -66,7 +66,7 @@ class PostBuilder
     protected function saveMeta(int $postId, array $metaValues): void
     {
         foreach ($metaValues as $key => $value) {
-            if ($key === 'convenant_Website') {
+            if ('convenant_Website' === $key) {
                 $this->handleShowOnTax($postId, $value);
 
                 continue;

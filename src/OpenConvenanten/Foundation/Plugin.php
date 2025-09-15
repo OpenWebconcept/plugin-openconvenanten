@@ -29,8 +29,8 @@ class Plugin
      */
     public function boot(): bool
     {
-		$this->loadTextDomain();
-		$this->config->boot();
+        $this->loadTextDomain();
+        $this->config->boot();
 
         $dependencyChecker = new DependencyChecker(
             new DismissableAdminNotice,
@@ -58,27 +58,27 @@ class Plugin
         return true;
     }
 
-	public function loadTextDomain(): void
-	{
-		load_plugin_textdomain($this->getName(), false, $this->getName() . '/languages/');
-	}
+    public function loadTextDomain(): void
+    {
+        load_plugin_textdomain($this->getName(), false, $this->getName() . '/languages/');
+    }
 
-	protected function registerProviders(): void
-	{
-		$this->callServiceProviders('register');
+    protected function registerProviders(): void
+    {
+        $this->callServiceProviders('register');
 
-		if (\is_admin()) {
-			$this->callServiceProviders('register', 'admin');
-			$this->callServiceProviders('boot', 'admin');
-		}
+        if (\is_admin()) {
+            $this->callServiceProviders('register', 'admin');
+            $this->callServiceProviders('boot', 'admin');
+        }
 
-		if ('cli' === php_sapi_name()) {
-			$this->callServiceProviders('register', 'cli');
-			$this->callServiceProviders('boot', 'cli');
-		}
+        if ('cli' === php_sapi_name()) {
+            $this->callServiceProviders('register', 'cli');
+            $this->callServiceProviders('boot', 'cli');
+        }
 
-		$this->callServiceProviders('boot');
-	}
+        $this->callServiceProviders('boot');
+    }
 
     /**
      * Allows for hooking into the plugin name.

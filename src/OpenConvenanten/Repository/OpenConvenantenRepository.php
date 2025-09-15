@@ -31,8 +31,8 @@ class OpenConvenantenRepository extends Base
             'tax_query' => [
                 [
                     'taxonomy' => 'openconvenanten-show-on',
-                    'terms'    => sanitize_text_field($blogSlug),
-                    'field'    => 'slug',
+                    'terms' => sanitize_text_field($blogSlug),
+                    'field' => 'slug',
                     'operator' => 'IN'
                 ]
             ]
