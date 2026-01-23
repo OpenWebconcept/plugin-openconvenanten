@@ -61,7 +61,6 @@ class OpenConvenanten
             }
         }
 
-       
         return array_filter($data);
     }
 
@@ -116,7 +115,7 @@ class OpenConvenanten
         if (! is_null($default) && gettype($data) !== gettype($default)) {
             return $default;
         }
-    
+
         return $data;
     }
 

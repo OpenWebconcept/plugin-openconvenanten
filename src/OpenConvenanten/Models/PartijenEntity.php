@@ -16,10 +16,26 @@ class PartijenEntity extends AbstractEntity
             if (empty($item[$this->getMetaKeyWithPrefix('Partijen_Naam')])) {
                 return null;
             }
-        
+
             return [
                 'Naam' => $item[$this->getMetaKeyWithPrefix('Partijen_Naam')] ?? '',
             ];
         }, $this->data));
+    }
+
+	public function get(): array
+    {
+        $data = $this->data();
+
+        foreach ($data as $row) {
+            if (! is_string($row['Naam'] ?? '') || '' === trim($row['Naam'] ?? '')) {
+                continue;
+            }
+
+			return $data;
+        }
+
+        // otherwise treat as "no data"
+        return [];
     }
 }
