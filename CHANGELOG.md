@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Version 1.2.8
+
+### Fix
+
+- Partijen in api response
+
 ## Version 1.2.7
 
 ### Fix
