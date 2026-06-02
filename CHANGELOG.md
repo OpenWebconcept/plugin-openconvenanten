@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## Version 1.2.10
+
+### Chore
+
+- Update dependencies
+
+## Version 1.2.9
+
+### Fix
+
+- non static method cannot be called statically
+
 ## Version 1.2.8
 
 ### Fix
